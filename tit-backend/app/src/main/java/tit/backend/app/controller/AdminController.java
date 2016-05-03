@@ -24,19 +24,21 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
+package tit.backend.app.controller;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * TIT backend application(Created: 4/24/2016)
- *
- * @author Yurii Bratchuk
+ * Created by stryk on 5/2/2016.
  */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+@RestController
+@RequestMapping("/admin")
+public class AdminController {
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String index() {
+        return "hi";
     }
 }

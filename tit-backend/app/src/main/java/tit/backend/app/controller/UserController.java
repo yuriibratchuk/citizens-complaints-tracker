@@ -24,19 +24,24 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
+package tit.backend.app.controller;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import tit.backend.app.dao.UserDao;
+import tit.backend.app.model.User;
 
-/**
- * TIT backend application(Created: 4/24/2016)
- *
- * @author Yurii Bratchuk
- */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+    @Autowired
+    private UserDao userDao;
+
+    @RequestMapping("all")
+    public Iterable<User> getUsers() {
+        return userDao.findAll();
     }
+
 }

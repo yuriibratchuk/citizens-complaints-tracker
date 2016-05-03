@@ -24,19 +24,44 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
+package tit.backend.app.api;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.google.maps.model.LatLng;
 
 /**
- * TIT backend application(Created: 4/24/2016)
+ * Latitude & longitude api.
  *
  * @author Yurii Bratchuk
  */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+public class ApiLatLng {
+    private double lat;
+
+    private double lng;
+
+    public ApiLatLng() {
+    }
+
+    public static ApiLatLng getFrom(LatLng latLng) {
+        ApiLatLng apiLatLng = new ApiLatLng();
+        apiLatLng.setLat(latLng.lat);
+        apiLatLng.setLng(latLng.lng);
+
+        return apiLatLng;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 }

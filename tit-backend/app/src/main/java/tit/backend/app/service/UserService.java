@@ -24,19 +24,30 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
+package tit.backend.app.service;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import tit.backend.app.dao.UserDao;
+import tit.backend.app.model.Ticket;
+
+import java.util.Set;
 
 /**
- * TIT backend application(Created: 4/24/2016)
+ * Service for interacting with users.
  *
  * @author Yurii Bratchuk
  */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+@Service
+public class UserService {
+
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private TicketService ticketService;
+
+    private Set<Ticket> getTicketsCreatedByUser(long userId) {
+        return null;//FIXME
     }
 }

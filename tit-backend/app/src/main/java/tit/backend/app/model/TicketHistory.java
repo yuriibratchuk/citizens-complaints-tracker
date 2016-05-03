@@ -24,19 +24,68 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
+package tit.backend.app.model;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
- * TIT backend application(Created: 4/24/2016)
+ * Actions occurs with tickets.
  *
  * @author Yurii Bratchuk
  */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+@Entity(name = "history")
+public class TicketHistory {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long entryId;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "ticket_id")
+    private Ticket ticket;
+
+    @NotNull
+    private Long timestamp;
+
+    @NotEmpty
+    private String content;
+
+    public TicketHistory() {
+    }
+
+    public Long getEntryId() {
+        return entryId;
+    }
+
+    public void setEntryId(Long entryId) {
+        this.entryId = entryId;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

@@ -24,19 +24,33 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package tit.backend.app.api;
 
 /**
- * TIT backend application(Created: 4/24/2016)
+ * Api User
  *
  * @author Yurii Bratchuk
  */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+public class ApiUser {
+    private long userId;
+    private String displayName;
+
+    public ApiUser() {
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 }

@@ -24,19 +24,16 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
+package tit.backend.app.exception;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * TIT backend application(Created: 4/24/2016)
+ * Ticket not found exception.
  *
  * @author Yurii Bratchuk
  */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
+public class TicketNotFoundException extends RuntimeException {
 }

@@ -24,19 +24,21 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
+package tit.backend.app.config;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.google.maps.GeoApiContext;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-/**
- * TIT backend application(Created: 4/24/2016)
- *
- * @author Yurii Bratchuk
- */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+@Configuration
+public class GoogleApiConfig {
+
+    @Value("${google.api.key}")
+    private String googleApiKey;
+
+    @Bean
+    public GeoApiContext geoApiContext() {
+        return new GeoApiContext().setApiKey(googleApiKey);
     }
 }

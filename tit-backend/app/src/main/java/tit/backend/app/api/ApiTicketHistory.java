@@ -24,19 +24,33 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package tit.backend.app.api;
 
 /**
- * TIT backend application(Created: 4/24/2016)
+ * History entry of ticket.
  *
  * @author Yurii Bratchuk
  */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+public class ApiTicketHistory {
+    private Long timestamp;
+    private String entry;
+
+    public ApiTicketHistory() {
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getEntry() {
+        return entry;
+    }
+
+    public void setEntry(String entry) {
+        this.entry = entry;
     }
 }

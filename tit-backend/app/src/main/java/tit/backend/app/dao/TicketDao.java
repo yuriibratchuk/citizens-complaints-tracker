@@ -24,19 +24,17 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
+package tit.backend.app.dao;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import tit.backend.app.model.Ticket;
 
 /**
- * TIT backend application(Created: 4/24/2016)
+ * DAO for Ticket.
  *
  * @author Yurii Bratchuk
  */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+@Repository
+public interface TicketDao extends JpaRepository<Ticket, Long> {
 }

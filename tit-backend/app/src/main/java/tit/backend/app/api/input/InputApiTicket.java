@@ -24,19 +24,63 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
+package tit.backend.app.api.input;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 
 /**
- * TIT backend application(Created: 4/24/2016)
- *
- * @author Yurii Bratchuk
+ * Created by stryk on 5/1/2016.
  */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+public class InputApiTicket {
+
+    @NotEmpty
+    @Length(max = 500)
+    private String subject;
+
+    @NotEmpty
+    private String body;
+
+    @NotNull
+    private Long latitude;
+
+    @NotNull
+    private Long longitude;
+
+    public InputApiTicket() {
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public Long getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Long latitude) {
+        this.latitude = latitude;
+    }
+
+    public Long getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Long longitude) {
+        this.longitude = longitude;
     }
 }

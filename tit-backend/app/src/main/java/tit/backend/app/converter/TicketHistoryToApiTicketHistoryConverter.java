@@ -24,19 +24,34 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
+package tit.backend.app.converter;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
+import tit.backend.app.api.ApiTicketHistory;
+import tit.backend.app.model.TicketHistory;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
- * TIT backend application(Created: 4/24/2016)
+ * Converter of persistence model {@link TicketHistory} to endpoint model {@link ApiTicketHistory}.
  *
  * @author Yurii Bratchuk
  */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+@Component
+public class TicketHistoryToApiTicketHistoryConverter implements Converter<TicketHistory, ApiTicketHistory>, CollectionConverter<TicketHistory, ApiTicketHistory> {
+    @Override
+    public ApiTicketHistory convert(TicketHistory source) {
+        ApiTicketHistory apiTicketHistory = new ApiTicketHistory();
+        apiTicketHistory.setTimestamp(source.getTimestamp());
+        apiTicketHistory.setEntry(source.getContent());
+
+        return apiTicketHistory;
+    }
+
+    @Override
+    public Collection<ApiTicketHistory> convertCollection(Collection<TicketHistory> source) {
+        return source.stream().map(this::convert).collect(Collectors.toList());
     }
 }

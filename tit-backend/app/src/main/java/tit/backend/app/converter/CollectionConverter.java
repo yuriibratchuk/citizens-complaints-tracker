@@ -24,19 +24,16 @@
  * SOFTWARE.
  */
 
-package tit.backend.app;
+package tit.backend.app.converter;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.Collection;
 
 /**
- * TIT backend application(Created: 4/24/2016)
+ * Converter for collection of items of type {@code S} to a collection of items of target type {@code T}.
  *
- * @author Yurii Bratchuk
+ * @param <S> the source type
+ * @param <T> the target type
  */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+public interface CollectionConverter<S, T> {
+    Collection<T> convertCollection(Collection<S> source);
 }
