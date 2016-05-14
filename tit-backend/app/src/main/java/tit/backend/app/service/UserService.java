@@ -29,9 +29,6 @@ package tit.backend.app.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tit.backend.app.dao.UserDao;
-import tit.backend.app.model.Ticket;
-
-import java.util.Set;
 
 /**
  * Service for interacting with users.
@@ -44,10 +41,5 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private TicketService ticketService;
-
-    private Set<Ticket> getTicketsCreatedByUser(long userId) {
-        return null;//FIXME
-    }
+    // TODO: implement me
 }

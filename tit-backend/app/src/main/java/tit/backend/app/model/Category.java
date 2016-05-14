@@ -24,20 +24,46 @@
  * SOFTWARE.
  */
 
-package tit.backend.app.dao;
+package tit.backend.app.model;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import tit.backend.app.model.Ticket;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
- * DAO for Ticket.
+ * Ticket category entity.
  *
  * @author Yurii Bratchuk
  */
-@Repository
-public interface TicketDao extends JpaRepository<Ticket, Long> {
-    Page<Ticket> findByAuthor(long userId, Pageable pageable);
+@Entity
+public class Category {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int categoryId;
+
+    @NotEmpty
+    private String categoryName;
+
+    public Category() {
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }

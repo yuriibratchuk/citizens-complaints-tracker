@@ -27,6 +27,10 @@
 package tit.backend.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import tit.backend.app.api.ApiTicket;
 import tit.backend.app.api.ApiTicketHistory;
@@ -87,9 +91,21 @@ public class TicketService {
 
     }
 
-    public ApiTicket get(long ticketId) {
+    public ApiTicket getOne(long ticketId) {
         Ticket ticket = attemptGet(ticketId);
         return ticketToApiTicketConverter.convert(ticket);
+    }
+
+    public List<ApiTicket> getList(int page, int sizeOfPage, Sort sort) {
+        Pageable pageable = new PageRequest(page, sizeOfPage, sort);
+        Page<Ticket> p = ticketDao.findAll(pageable);
+        return p.getContent().stream().map(ticketToApiTicketConverter::convert).collect(Collectors.toList());
+    }
+
+    public List<ApiTicket> getOfAuthor(long userId, int page, int sizeOfPage, Sort sort) {
+        Pageable pageable = new PageRequest(page, sizeOfPage, sort);
+        Page<Ticket> p = ticketDao.findByAuthor(userId, pageable);
+        return p.getContent().stream().map(ticketToApiTicketConverter::convert).collect(Collectors.toList());
     }
 
     public List<ApiTicketHistory> getHistory(long ticketId) {
@@ -99,7 +115,7 @@ public class TicketService {
         if (ticketHistory == null) {
             return Collections.emptyList();
         }
-        return ticketHistoryToApiTicketHistoryConverter.convertCollection(ticketHistory).stream().collect(Collectors.toList());
+        return ticketHistory.stream().map(ticketHistoryToApiTicketHistoryConverter::convert).collect(Collectors.toList());
     }
 
     @Transactional
@@ -119,7 +135,7 @@ public class TicketService {
         Set<User> usersWhoLike = ticket.getLikes();
         for (Iterator<User> iterator = usersWhoLike.iterator(); iterator.hasNext(); ) {
             User u = iterator.next();
-            if (u.getId().equals(user.getId())) {
+            if (u.getUserId().equals(user.getUserId())) {
                 iterator.remove();
             }
         }

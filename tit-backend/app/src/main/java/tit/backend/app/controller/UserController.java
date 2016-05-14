@@ -27,14 +27,21 @@
 package tit.backend.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.*;
+import tit.backend.app.api.ApiTicket;
 import tit.backend.app.dao.UserDao;
 import tit.backend.app.model.User;
+import tit.backend.app.service.TicketService;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
+
+    @Autowired
+    private TicketService ticketService;
 
     @Autowired
     private UserDao userDao;
@@ -42,6 +49,14 @@ public class UserController {
     @RequestMapping("all")
     public Iterable<User> getUsers() {
         return userDao.findAll();
+    }
+
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public List<ApiTicket> getOfAuthor(@PathVariable long userId,
+                                       @RequestParam(required = false) int page,
+                                       @RequestParam(required = false) int pageSize,
+                                       @RequestParam(required = false) String fields) {
+        return ticketService.getOfAuthor(userId, page, pageSize, new Sort(Sort.Direction.DESC, "createdAt"));
     }
 
 }

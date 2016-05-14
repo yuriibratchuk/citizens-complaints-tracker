@@ -50,7 +50,7 @@ import java.util.List;
  * @author Yurii Bratchuk
  */
 @RestController
-@RequestMapping("/ticket")
+@RequestMapping("/tickets")
 public class TicketController {
 
     @Autowired
@@ -69,8 +69,8 @@ public class TicketController {
     }
 
     @RequestMapping(value = "/{ticketId}", method = RequestMethod.GET)
-    public ApiTicket get(@PathVariable long ticketId, @RequestParam(required = false) String fields, @AuthenticationPrincipal User user) {
-        return ticketService.get(ticketId).onlySelectedFields(fields);
+    public ApiTicket getOne(@PathVariable long ticketId, @RequestParam(required = false) String fields, @AuthenticationPrincipal User user) {
+        return ticketService.getOne(ticketId).onlySelectedFields(fields);
     }
 
     @RequestMapping(value = "/{ticketId}/history}", method = RequestMethod.GET)
@@ -80,12 +80,12 @@ public class TicketController {
 
     @RequestMapping(value = "/{ticketId}/liked}", method = RequestMethod.GET)
     public List<ApiUser> getLiked(@PathVariable long ticketId, @AuthenticationPrincipal User user) {
-        return ticketService.get(ticketId).onlySelectedFields("liked").getLiked();
+        return ticketService.getOne(ticketId).onlySelectedFields("liked").getLiked();
     }
 
     @RequestMapping(value = "/{ticketId}/subscribers}", method = RequestMethod.GET)
     public List<ApiUser> getSubscribers(@PathVariable long ticketId, @AuthenticationPrincipal User user) {
-        return ticketService.get(ticketId).onlySelectedFields("subscribed").getSubscribers();
+        return ticketService.getOne(ticketId).onlySelectedFields("subscribed").getSubscribers();
     }
 
 }

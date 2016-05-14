@@ -31,16 +31,13 @@ import org.springframework.stereotype.Component;
 import tit.backend.app.api.ApiTicketHistory;
 import tit.backend.app.model.TicketHistory;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
-
 /**
  * Converter of persistence model {@link TicketHistory} to endpoint model {@link ApiTicketHistory}.
  *
  * @author Yurii Bratchuk
  */
 @Component
-public class TicketHistoryToApiTicketHistoryConverter implements Converter<TicketHistory, ApiTicketHistory>, CollectionConverter<TicketHistory, ApiTicketHistory> {
+public class TicketHistoryToApiTicketHistoryConverter implements Converter<TicketHistory, ApiTicketHistory> {
     @Override
     public ApiTicketHistory convert(TicketHistory source) {
         ApiTicketHistory apiTicketHistory = new ApiTicketHistory();
@@ -50,8 +47,4 @@ public class TicketHistoryToApiTicketHistoryConverter implements Converter<Ticke
         return apiTicketHistory;
     }
 
-    @Override
-    public Collection<ApiTicketHistory> convertCollection(Collection<TicketHistory> source) {
-        return source.stream().map(this::convert).collect(Collectors.toList());
-    }
 }

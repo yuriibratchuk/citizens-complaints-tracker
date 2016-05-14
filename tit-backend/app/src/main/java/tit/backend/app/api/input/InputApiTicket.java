@@ -32,7 +32,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by stryk on 5/1/2016.
+ * API model for new ticket. Contain data taken from frontend.
+ *
+ * @author Yurii Bratchuk
  */
 public class InputApiTicket {
 

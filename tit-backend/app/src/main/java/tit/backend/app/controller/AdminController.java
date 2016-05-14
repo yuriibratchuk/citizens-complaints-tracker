@@ -31,7 +31,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by stryk on 5/2/2016.
+ * Controller for serving administrative endpoints.
+ *
+ * @author Yurii Bratchuk
  */
 @RestController
 @RequestMapping("/admin")

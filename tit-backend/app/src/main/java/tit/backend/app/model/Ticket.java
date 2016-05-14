@@ -59,12 +59,17 @@ public class Ticket {
 
     @NotNull
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "author_id")
     private User author;
 
     @NotNull
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "assigned_id")
     private User assignedTo;
 
     @NotNull
@@ -84,6 +89,12 @@ public class Ticket {
             joinColumns = {@JoinColumn(name = "ticket_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private Set<User> subscribers = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "ticket_label",
+            joinColumns = {@JoinColumn(name = "ticket_id")},
+            inverseJoinColumns = {@JoinColumn(name = "label_id")})
+    private Set<Role> labels = new HashSet<>();
 
     public Ticket() {
     }
@@ -136,6 +147,14 @@ public class Ticket {
         this.author = author;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public User getAssignedTo() {
         return assignedTo;
     }
@@ -174,5 +193,13 @@ public class Ticket {
 
     public void setSubscribers(Set<User> subscribers) {
         this.subscribers = subscribers;
+    }
+
+    public Set<Role> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(Set<Role> labels) {
+        this.labels = labels;
     }
 }

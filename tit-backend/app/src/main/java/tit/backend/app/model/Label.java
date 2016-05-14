@@ -24,16 +24,58 @@
  * SOFTWARE.
  */
 
-package tit.backend.app.converter;
+package tit.backend.app.model;
 
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * Converter for collection of items of type {@code S} to a collection of items of target type {@code T}.
+ * Label of ticket entity.
  *
- * @param <S> the source type
- * @param <T> the target type
+ * @author Yurii Bratchuk
  */
-public interface CollectionConverter<S, T> {
-    Collection<T> convertCollection(Collection<S> source);
+@Entity
+public class Label {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer labelId;
+
+    @NotEmpty
+    private String labelName;
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "labels")
+    private Set<Ticket> tickets = new HashSet<Ticket>();
+
+    public Label() {
+    }
+
+    public Integer getLabelId() {
+        return labelId;
+    }
+
+    public void setLabelId(Integer labelId) {
+        this.labelId = labelId;
+    }
+
+    public String getLabelName() {
+        return labelName;
+    }
+
+    public void setLabelName(String labelName) {
+        this.labelName = labelName;
+    }
+
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
+    }
 }

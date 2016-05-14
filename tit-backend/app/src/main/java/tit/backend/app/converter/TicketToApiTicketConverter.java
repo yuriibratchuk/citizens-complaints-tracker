@@ -61,10 +61,10 @@ public class TicketToApiTicketConverter implements Converter<Ticket, ApiTicket> 
         User assignedTo = source.getAssignedTo();
         apiTicket.setAssignedTo(userToApiUserConverter.convert(assignedTo));
 
-        Collection<ApiUser> usersWhoLiked = userToApiUserConverter.convertCollection(source.getLikes());
+        Collection<ApiUser> usersWhoLiked = source.getLikes().stream().map(userToApiUserConverter::convert).collect(Collectors.toList());
         apiTicket.setLiked(usersWhoLiked.stream().collect(Collectors.toList()));
 
-        Collection<ApiUser> subscribers = userToApiUserConverter.convertCollection(source.getSubscribers());
+        Collection<ApiUser> subscribers = source.getSubscribers().stream().map(userToApiUserConverter::convert).collect(Collectors.toList());
         apiTicket.setSubscribers(subscribers.stream().collect(Collectors.toList()));
 
         apiTicket.setCreatedAt(source.getCreatedAt());
@@ -72,4 +72,5 @@ public class TicketToApiTicketConverter implements Converter<Ticket, ApiTicket> 
 
         return apiTicket;
     }
+
 }

@@ -34,5 +34,5 @@ import tit.backend.app.model.User;
 public interface UserDao extends JpaRepository<User, Long> {
     User findByLogin(String login);
 
-    User findByName(String name);
+    User findByFormalName(String name);
 }

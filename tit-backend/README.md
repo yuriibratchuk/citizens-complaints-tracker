@@ -12,5 +12,5 @@ API requests for authorized users
 ---
 
 ```sh
-curl http://localhost:8080/ticket/1 -H "Authorization: Bearer 4da04eb2-d6f8-4e90-8711-0d0d83777e39"
+curl http://localhost:8080/tickets/1 -H "Authorization: Bearer 4da04eb2-d6f8-4e90-8711-0d0d83777e39"
 ```

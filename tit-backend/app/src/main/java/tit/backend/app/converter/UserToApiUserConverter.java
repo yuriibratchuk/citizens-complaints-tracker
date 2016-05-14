@@ -31,27 +31,20 @@ import org.springframework.stereotype.Component;
 import tit.backend.app.api.ApiUser;
 import tit.backend.app.model.User;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
-
 /**
  * Converter of persistence model {@link User} to endpoint model {@link ApiUser}.
  *
  * @author Yurii Bratchuk
  */
 @Component
-public class UserToApiUserConverter implements Converter<User, ApiUser>, CollectionConverter<User, ApiUser> {
+public class UserToApiUserConverter implements Converter<User, ApiUser> {
     @Override
     public ApiUser convert(User source) {
         ApiUser apiUser = new ApiUser();
-        apiUser.setUserId(source.getId());
-        apiUser.setDisplayName(source.getName());
+        apiUser.setUserId(source.getUserId());
+        apiUser.setDisplayName(source.getFormalName());
 
         return apiUser;
     }
 
-    @Override
-    public Collection<ApiUser> convertCollection(Collection<User> source) {
-        return source.stream().map(this::convert).collect(Collectors.toList());
-    }
 }

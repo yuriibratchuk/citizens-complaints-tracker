@@ -38,10 +38,10 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long userId;
 
     @NotEmpty
-    private String name;
+    private String formalName;
 
     @NotEmpty
     @Column(unique = true, nullable = false)
@@ -61,27 +61,27 @@ public class User {
 
     public User(User user) {
         super();
-        this.id = user.getId();
-        this.name = user.getName();
+        this.userId = user.getUserId();
+        this.formalName = user.getFormalName();
         this.login = user.getLogin();
         this.password = user.getPassword();
         this.roles = user.getRoles();
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getFormalName() {
+        return formalName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFormalName(String formalName) {
+        this.formalName = formalName;
     }
 
     public String getLogin() {
@@ -113,11 +113,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id);
+        return Objects.equals(userId, user.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(userId);
     }
 }
