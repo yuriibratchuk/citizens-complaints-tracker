@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editCaption"
+        class="tit.backend.web.ticket.TicketEdit"
+        datasource="ticketDs"
+        messagesPack="tit.backend.web.ticket">
+    <dsContext>
+        <datasource id="ticketDs"
+                    class="tit.backend.entity.Ticket"
+                    view="ticketWithAssignee"/>
+        <collectionDatasource id="categoriesDs"
+                              class="tit.backend.entity.TicketCategory"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from tit$TicketCategory e where e.enabled = true]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout spacing="true">
+        <scrollBox height="100%">
+            <hbox spacing="true">
+                <vbox margin="false,false,true,false">
+                    <fieldGroup id="mainEditableFields"
+                                datasource="ticketDs">
+                        <column>
+                            <field id="subject"
+                                   width="450px"/>
+                            <field id="category"
+                                   optionsDatasource="categoriesDs"
+                                   width="450px"/>
+                            <field id="body"
+                                   rows="10"
+                                   width="640px"/>
+                            <field id="emergency"/>
+                            <field id="address"
+                                   width="450px"/>
+                            <field id="map"
+                                   caption="On the map"
+                                   custom="true"
+                                   editable="false"
+                                   width="450px"/>
+                        </column>
+                    </fieldGroup>
+                    <groupBox id="attachmentsGroupBox"
+                              caption="Photo"
+                              expand="embeddedImage"
+                              spacing="true"
+                              width="AUTO">
+                        <embedded id="embeddedImage"
+                                  align="MIDDLE_CENTER"
+                                  height="250px"
+                                  width="250px"/>
+                        <hbox align="BOTTOM_LEFT"
+                              spacing="true">
+                            <upload id="uploadField"/>
+                            <button id="downloadImageBtn"
+                                    caption="Download"
+                                    invoke="onDownloadImageBtnClick"/>
+                            <button id="clearImageBtn"
+                                    caption="Clear"
+                                    invoke="onClearImageBtnClick"/>
+                        </hbox>
+                    </groupBox>
+                </vbox>
+                <vbox>
+                    <fieldGroup id="moderationFields"
+                                border="visible"
+                                caption="Moderation"
+                                datasource="ticketDs">
+                        <column>
+                            <field id="state"
+                                   width="250px"/>
+                            <field id="prioritised"/>
+                            <field id="assignee"
+                                   width="250px"/>
+                            <field id="plannedDate"
+                                   width="250px"/>
+                            <field id="declineReason"
+                                   rows="2"
+                                   width="250px"/>
+                        </column>
+                    </fieldGroup>
+                    <fieldGroup id="feedbackFields"
+                                border="visible"
+                                caption="Feedback"
+                                datasource="ticketDs">
+                        <column width="250px">
+                            <field id="usergrade"
+                                   custom="true"/>
+                            <field id="feedback"
+                                   rows="3"/>
+                        </column>
+                    </fieldGroup>
+                    <fieldGroup id="executorFields"
+                                border="visible"
+                                caption="Executor panel"
+                                datasource="ticketDs">
+                        <column>
+                            <field id="state"
+                                   width="250px"/>
+                            <field id="assignee"/>
+                            <field id="plannedDate"
+                                   width="250px"/>
+                            <field id="declineReason"
+                                   rows="4"
+                                   width="250px"/>
+                        </column>
+                    </fieldGroup>
+                </vbox>
+            </hbox>
+            <frame id="windowActions"
+                   height="100%"
+                   screen="editWindowActions"/>
+        </scrollBox>
+    </layout>
+</window>

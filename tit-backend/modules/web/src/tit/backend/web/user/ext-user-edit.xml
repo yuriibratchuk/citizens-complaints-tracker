@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ TODO Copyright
+  -->
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editCaption"
+        class="tit.backend.web.user.ExtUserEditor"
+        extends="/com/haulmont/cuba/gui/app/security/user/edit/user-edit.xml"
+        messagesPack="tit.backend.web.user">
+    <layout>
+        <groupBox id="propertiesBox">
+            <grid id="propertiesGrid">
+                <rows>
+                    <row id="extPropertiesRow">
+                        <fieldGroup caption="Extended information"
+                                    datasource="userDs">
+                            <column>
+                                <field id="address"
+                                       caption="Address"/>
+                            </column>
+                        </fieldGroup>
+                    </row>
+                </rows>
+            </grid>
+        </groupBox>
+    </layout>
+</window>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="tit.backend.web.ticketcategory.TicketCategoryBrowse"
+        focusComponent="ticketCategoriesTable"
+        lookupComponent="ticketCategoriesTable"
+        messagesPack="tit.backend.web.ticketcategory">
+    <dsContext>
+        <collectionDatasource id="ticketCategoriesDs"
+                              class="tit.backend.entity.TicketCategory"
+                              view="_local">
+            <query>
+                <![CDATA[select e from tit$TicketCategory e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout spacing="true">
+        <table id="ticketCategoriesTable"
+               height="300px"
+               width="100%">
+            <actions>
+                <action id="create"
+                        openType="DIALOG"/>
+                <action id="edit"
+                        openType="DIALOG"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="enabled"/>
+                <column id="name"/>
+            </columns>
+            <rows datasource="ticketCategoriesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="ticketCategoriesTable.create"/>
+                <button id="editBtn"
+                        action="ticketCategoriesTable.edit"/>
+                <button id="removeBtn"
+                        action="ticketCategoriesTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>
