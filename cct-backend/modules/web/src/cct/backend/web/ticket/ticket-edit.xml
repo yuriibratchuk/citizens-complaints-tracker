@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2016 Contributors of CCT project
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editCaption"
+        class="cct.backend.web.ticket.TicketEdit"
+        datasource="ticketDs"
+        messagesPack="cct.backend.web.ticket">
+    <dsContext>
+        <datasource id="ticketDs"
+                    class="cct.backend.entity.Ticket"
+                    view="ticketWithAssignee"/>
+        <collectionDatasource id="categoriesDs"
+                              class="cct.backend.entity.TicketCategory"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from cct$TicketCategory e where e.enabled = true]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout spacing="true">
+        <scrollBox height="100%">
+            <hbox spacing="true">
+                <vbox margin="false,false,true,false">
+                    <fieldGroup id="mainEditableFields"
+                                datasource="ticketDs">
+                        <column>
+                            <field id="subject"
+                                   width="450px"/>
+                            <field id="category"
+                                   optionsDatasource="categoriesDs"
+                                   width="450px"/>
+                            <field id="body"
+                                   rows="10"
+                                   width="640px"/>
+                            <field id="emergency"/>
+                            <field id="address"
+                                   width="450px"/>
+                            <field id="map"
+                                   caption="On the map"
+                                   custom="true"
+                                   editable="false"
+                                   width="450px"/>
+                        </column>
+                    </fieldGroup>
+                    <groupBox id="attachmentsGroupBox"
+                              caption="Photo"
+                              expand="embeddedImage"
+                              spacing="true"
+                              width="AUTO">
+                        <embedded id="embeddedImage"
+                                  align="MIDDLE_CENTER"
+                                  height="250px"
+                                  width="250px"/>
+                        <hbox align="BOTTOM_LEFT"
+                              spacing="true">
+                            <upload id="uploadField"/>
+                            <button id="downloadImageBtn"
+                                    caption="Download"
+                                    invoke="onDownloadImageBtnClick"/>
+                            <button id="clearImageBtn"
+                                    caption="Clear"
+                                    invoke="onClearImageBtnClick"/>
+                        </hbox>
+                    </groupBox>
+                </vbox>
+                <vbox>
+                    <fieldGroup id="moderationFields"
+                                border="visible"
+                                caption="Moderation"
+                                datasource="ticketDs">
+                        <column>
+                            <field id="state"
+                                   width="250px"/>
+                            <field id="prioritised"/>
+                            <field id="assignee"
+                                   width="250px"/>
+                            <field id="plannedDate"
+                                   width="250px"/>
+                            <field id="declineReason"
+                                   rows="2"
+                                   width="250px"/>
+                        </column>
+                    </fieldGroup>
+                    <fieldGroup id="feedbackFields"
+                                border="visible"
+                                caption="Feedback"
+                                datasource="ticketDs">
+                        <column width="250px">
+                            <field id="usergrade"
+                                   custom="true"/>
+                            <field id="feedback"
+                                   rows="3"/>
+                        </column>
+                    </fieldGroup>
+                    <fieldGroup id="executorFields"
+                                border="visible"
+                                caption="Executor panel"
+                                datasource="ticketDs">
+                        <column>
+                            <field id="state"
+                                   width="250px"/>
+                            <field id="assignee"/>
+                            <field id="plannedDate"
+                                   width="250px"/>
+                            <field id="declineReason"
+                                   rows="4"
+                                   width="250px"/>
+                        </column>
+                    </fieldGroup>
+                </vbox>
+            </hbox>
+            <frame id="windowActions"
+                   height="100%"
+                   screen="editWindowActions"/>
+        </scrollBox>
+    </layout>
+</window>

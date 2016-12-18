@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
+    <include file="/screens.xml"/>
+    <screen id="cct$Ticket.browse"
+            template="/cct/backend/web/ticket/ticket-browse.xml"/>
+    <screen id="cct$Ticket.edit"
+            template="/cct/backend/web/ticket/ticket-edit.xml"/>
+    <screen id="sec$User.edit"
+            template="/cct/backend/web/user/ext-user-edit.xml"/>
+    <screen id="cct$TicketCategory.browse"
+            template="/cct/backend/web/ticketcategory/ticket-category-browse.xml"/>
+    <screen id="cct$TicketCategory.edit"
+            template="/cct/backend/web/ticketcategory/ticket-category-edit.xml"/>
+</screen-config>

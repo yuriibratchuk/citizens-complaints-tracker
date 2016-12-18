@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<components>
+    <component>
+        <name>sample</name>
+        <componentLoader>cct.backend.gui.xml.layout.loaders.SampleLoader</componentLoader>
+        <class>cct.backend.web.gui.components.WebSample</class>
+    </component>
+</components>

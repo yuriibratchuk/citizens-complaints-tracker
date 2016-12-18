@@ -1,2 +1,2 @@
-# town-improvements-tracker
-Application for creting requests for improvements in your city
+# Citizens' compliants tracker
+Citizens' complaints online system for your town, free and open source.
