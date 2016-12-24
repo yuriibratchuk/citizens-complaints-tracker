@@ -4,8 +4,8 @@
     <persistence-unit name="cct-backend"
                       transaction-type="RESOURCE_LOCAL">
         <class>cct.backend.entity.UserExt</class>
-        <class>cct.backend.entity.Ticket</class>
+        <class>cct.backend.entity.Complaint</class>
         <class>cct.backend.entity.Activity</class>
-        <class>cct.backend.entity.TicketCategory</class>
+        <class>cct.backend.entity.ComplaintCategory</class>
     </persistence-unit>
 </persistence>

@@ -1,5 +1,5 @@
--- begin CCT_TICKET
-create table CCT_TICKET (
+-- begin CCT_COMPLAINT
+create table CCT_COMPLAINT (
     ID bigint not null,
     UUID varchar(36),
     VERSION integer not null,
@@ -28,7 +28,7 @@ create table CCT_TICKET (
     EXECUTOR_REMARK longvarchar,
     --
     primary key (ID)
-)^-- end CCT_TICKET
+)^-- end CCT_COMPLAINT
 
 -- begin SEC_USER
 alter table SEC_USER add column ADDRESS varchar(255) ^
@@ -38,23 +38,23 @@ update SEC_USER set DTYPE = 'cct$UserExt' where DTYPE is null ^
 -- begin CCT_ACTIVITY
 create table CCT_ACTIVITY (
     ID varchar(36) not null,
+    VERSION integer not null,
     CREATE_TS timestamp,
     CREATED_BY varchar(50),
-    VERSION integer not null,
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    TICKET_ID bigint not null,
+    COMPLAINT_ID bigint not null,
     SUBJECT varchar(255),
     COMMENT_ longvarchar not null,
     --
     primary key (ID)
 )^
 -- end CCT_ACTIVITY
--- begin CCT_TICKET_CATEGORY
-create table CCT_TICKET_CATEGORY (
+-- begin CCT_COMPLAINT_CATEGORY
+create table CCT_COMPLAINT_CATEGORY (
     ID integer not null,
     UUID varchar(36),
     VERSION integer not null,
@@ -70,4 +70,4 @@ create table CCT_TICKET_CATEGORY (
     --
     primary key (ID)
 )^
--- end CCT_TICKET_CATEGORY
+-- end CCT_COMPLAINT_CATEGORY

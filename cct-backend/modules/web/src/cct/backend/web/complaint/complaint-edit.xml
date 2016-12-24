@@ -24,18 +24,18 @@
   -->
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
         caption="msg://editCaption"
-        class="cct.backend.web.ticket.TicketEdit"
-        datasource="ticketDs"
-        messagesPack="cct.backend.web.ticket">
+        class="cct.backend.web.complaint.ComplaintEdit"
+        datasource="complaintDs"
+        messagesPack="cct.backend.web.complaint">
     <dsContext>
-        <datasource id="ticketDs"
-                    class="cct.backend.entity.Ticket"
-                    view="ticketWithAssignee"/>
+        <datasource id="complaintDs"
+                    class="cct.backend.entity.Complaint"
+                    view="complaintWithAssignee"/>
         <collectionDatasource id="categoriesDs"
-                              class="cct.backend.entity.TicketCategory"
+                              class="cct.backend.entity.ComplaintCategory"
                               view="_minimal">
             <query>
-                <![CDATA[select e from cct$TicketCategory e where e.enabled = true]]>
+                <![CDATA[select e from cct$ComplaintCategory e where e.enabled = true]]>
             </query>
         </collectionDatasource>
         <collectionDatasource id="userExtsDs"
@@ -52,7 +52,7 @@
             <hbox spacing="true">
                 <vbox margin="false,false,true,false">
                     <fieldGroup id="mainEditableFields"
-                                datasource="ticketDs">
+                                datasource="complaintDs">
                         <column>
                             <field id="subject"
                                    width="450px"/>
@@ -98,7 +98,7 @@
                     <fieldGroup id="moderationFields"
                                 border="visible"
                                 caption="Moderation"
-                                datasource="ticketDs">
+                                datasource="complaintDs">
                         <column>
                             <field id="state"
                                    width="250px"/>

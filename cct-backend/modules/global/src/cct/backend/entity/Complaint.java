@@ -41,14 +41,14 @@ import javax.persistence.TemporalType;
 import java.util.UUID;
 
 /**
- * Ticket entity.
+ * Complaint entity.
  *
  * @author Yurii Bratchuk
  */
 @NamePattern("%s|subject")
-@Table(name = "CCT_TICKET")
-@Entity(name = "cct$Ticket")
-public class Ticket extends BaseLongIdEntity implements Versioned, SoftDelete, Updatable, Creatable, HasUuid {
+@Table(name = "CCT_COMPLAINT")
+@Entity(name = "cct$Complaint")
+public class Complaint extends BaseLongIdEntity implements Versioned, SoftDelete, Updatable, Creatable, HasUuid {
     private static final long serialVersionUID = 8851962717573536948L;
 
     @Column(name = "SUBJECT", nullable = false)
@@ -78,7 +78,7 @@ public class Ticket extends BaseLongIdEntity implements Versioned, SoftDelete, U
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CATEGORY_ID")
-    protected TicketCategory category;
+    protected ComplaintCategory category;
 
     @Column(name = "LATITUDE")
     protected Double latitude;
@@ -236,11 +236,11 @@ public class Ticket extends BaseLongIdEntity implements Versioned, SoftDelete, U
     }
 
 
-    public void setCategory(TicketCategory category) {
+    public void setCategory(ComplaintCategory category) {
         this.category = category;
     }
 
-    public TicketCategory getCategory() {
+    public ComplaintCategory getCategory() {
         return category;
     }
 
@@ -280,12 +280,12 @@ public class Ticket extends BaseLongIdEntity implements Versioned, SoftDelete, U
     }
 
 
-    public void setState(TicketState state) {
+    public void setState(ComplaintState state) {
         this.state = state == null ? null : state.getId();
     }
 
-    public TicketState getState() {
-        return state == null ? null : TicketState.fromId(state);
+    public ComplaintState getState() {
+        return state == null ? null : ComplaintState.fromId(state);
     }
 
 

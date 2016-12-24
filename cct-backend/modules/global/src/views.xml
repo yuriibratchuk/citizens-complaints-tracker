@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
-    <view class="cct.backend.entity.Ticket"
-          name="ticketWithAssignee"
+    <view class="cct.backend.entity.Complaint"
+          name="complaintWithAssignee"
           systemProperties="true">
         <property name="subject"/>
         <property name="state"/>

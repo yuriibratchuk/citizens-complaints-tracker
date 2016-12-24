@@ -25,19 +25,19 @@
 
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
         caption="msg://editCaption"
-        class="cct.backend.web.ticketcategory.TicketCategoryEdit"
-        datasource="ticketCategoryDs"
+        class="cct.backend.web.complaintcategory.ComplaintCategoryEdit"
+        datasource="complaintCategoryDs"
         focusComponent="fieldGroup"
-        messagesPack="cct.backend.web.ticketcategory">
+        messagesPack="cct.backend.web.complaintcategory">
     <dsContext>
-        <datasource id="ticketCategoryDs"
-                    class="cct.backend.entity.TicketCategory"
+        <datasource id="complaintCategoryDs"
+                    class="cct.backend.entity.ComplaintCategory"
                     view="_local"/>
     </dsContext>
     <layout expand="windowActions"
             spacing="true">
         <fieldGroup id="fieldGroup"
-                    datasource="ticketCategoryDs">
+                    datasource="complaintCategoryDs">
             <column width="250px">
                 <field id="name"/>
                 <field id="enabled"/>

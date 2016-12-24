@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
-    <item id="cct$Ticket.browse"
+    <item id="cct$Complaint.browse"
           insertBefore="administration"/>
-    <item id="cct$TicketCategory.browse"
+    <item id="cct$ComplaintCategory.browse"
           insertBefore="sec$User.browse"
           openType="DIALOG"/>
 </menu-config>

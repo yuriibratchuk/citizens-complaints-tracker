@@ -21,14 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cct.backend.web.ticketcategory;
+package cct.backend.entity;
 
-import com.haulmont.cuba.gui.components.AbstractLookup;
+import com.haulmont.chile.core.datatypes.impl.EnumClass;
+
+import javax.annotation.Nullable;
+
 
 /**
- * Ticket category browser.
+ * Complaint state enum.
  *
  * @author Yurii Bratchuk
  */
-public class TicketCategoryBrowse extends AbstractLookup {
+public enum ComplaintState implements EnumClass<Integer> {
+
+    ACCEPTED(0),
+    IN_PROGRESS(1),
+    CLOSED(2),
+    DECLINED(3);
+
+    private Integer id;
+
+    ComplaintState(Integer value) {
+        this.id = value;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    @Nullable
+    public static ComplaintState fromId(Integer id) {
+        for (ComplaintState at : ComplaintState.values()) {
+            if (at.getId().equals(id)) {
+                return at;
+            }
+        }
+        return null;
+    }
 }

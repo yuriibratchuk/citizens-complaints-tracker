@@ -21,42 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cct.backend.entity;
+package cct.backend.web.complaintcategory;
 
-import com.haulmont.chile.core.datatypes.impl.EnumClass;
-
-import javax.annotation.Nullable;
-
+import com.haulmont.cuba.gui.components.AbstractEditor;
+import cct.backend.entity.ComplaintCategory;
 
 /**
- * Ticket state enum.
+ * Complaint category editor.
  *
  * @author Yurii Bratchuk
  */
-public enum TicketState implements EnumClass<Integer> {
-
-    ACCEPTED(0),
-    IN_PROGRESS(1),
-    CLOSED(2),
-    DECLINED(3);
-
-    private Integer id;
-
-    TicketState(Integer value) {
-        this.id = value;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    @Nullable
-    public static TicketState fromId(Integer id) {
-        for (TicketState at : TicketState.values()) {
-            if (at.getId().equals(id)) {
-                return at;
-            }
-        }
-        return null;
-    }
+public class ComplaintCategoryEdit extends AbstractEditor<ComplaintCategory> {
 }

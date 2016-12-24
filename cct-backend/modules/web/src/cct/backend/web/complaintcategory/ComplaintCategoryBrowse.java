@@ -21,15 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cct.backend.web.ticketcategory;
+package cct.backend.web.complaintcategory;
 
-import com.haulmont.cuba.gui.components.AbstractEditor;
-import cct.backend.entity.TicketCategory;
+import com.haulmont.cuba.gui.components.AbstractLookup;
 
 /**
- * Ticket category editor.
+ * Complaint category browser.
  *
  * @author Yurii Bratchuk
  */
-public class TicketCategoryEdit extends AbstractEditor<TicketCategory> {
+public class ComplaintCategoryBrowse extends AbstractLookup {
 }

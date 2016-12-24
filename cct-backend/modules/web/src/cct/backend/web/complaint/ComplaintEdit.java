@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cct.backend.web.ticket;
+package cct.backend.web.complaint;
 
+import cct.backend.entity.Complaint;
 import com.haulmont.cuba.core.app.FileStorageService;
 import com.haulmont.cuba.core.entity.FileDescriptor;
 import com.haulmont.cuba.core.global.FileStorageException;
@@ -42,7 +43,6 @@ import org.vaadin.addon.leaflet.LMap;
 import org.vaadin.addon.leaflet.LMarker;
 import org.vaadin.addon.leaflet.LOpenStreetMapLayer;
 import org.vaadin.addon.leaflet.shared.Point;
-import cct.backend.entity.Ticket;
 
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
@@ -52,11 +52,11 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Editor for Ticket entity.
+ * Editor for Complaint entity.
  *
  * @author Yurii Bratchuk
  */
-public class TicketEdit extends AbstractEditor<Ticket> {
+public class ComplaintEdit extends AbstractEditor<Complaint> {
 
     private static final int IMG_HEIGHT = 190;
 
@@ -89,7 +89,7 @@ public class TicketEdit extends AbstractEditor<Ticket> {
     private Button clearImageBtn;
 
     @Inject
-    private Datasource<Ticket> ticketDs;
+    private Datasource<Complaint> complaintDs;
 
 
     private LMap leafletMap = new LMap();
@@ -109,11 +109,11 @@ public class TicketEdit extends AbstractEditor<Ticket> {
                 if (c instanceof LMarker) {
                     leafletMap.removeComponent(c);
 
-                    Ticket ticket = getItem();
-                    if (ticket == null) return;
+                    Complaint complaint = getItem();
+                    if (complaint == null) return;
 
-                    ticket.setLatitude(null);
-                    ticket.setLongitude(null);
+                    complaint.setLatitude(null);
+                    complaint.setLongitude(null);
 
                     isExpressAddAllow = true;
                     break;
@@ -125,14 +125,14 @@ public class TicketEdit extends AbstractEditor<Ticket> {
 
             if (isLayerOnlyAdded || isExpressAddAllow) {
 
-                Ticket ticket = getItem();
-                if (ticket == null) return;
+                Complaint complaint = getItem();
+                if (complaint == null) return;
 
                 Point point = event.getPoint();
                 double latitude = point.getLat();
                 double longitude = point.getLon();
-                ticket.setLatitude(latitude);
-                ticket.setLongitude(longitude);
+                complaint.setLatitude(latitude);
+                complaint.setLongitude(longitude);
                 leafletMap.addComponent(createMarker(latitude, longitude));
 
             }
@@ -161,7 +161,7 @@ public class TicketEdit extends AbstractEditor<Ticket> {
         uploadField.addFileUploadErrorListener(event ->
                 showNotification("File upload error", NotificationType.HUMANIZED));
 
-        ticketDs.addItemPropertyChangeListener(event -> {
+        complaintDs.addItemPropertyChangeListener(event -> {
             if ("imageFile".equals(event.getProperty()))
                 updateImageButtons(event.getValue() != null);
         });

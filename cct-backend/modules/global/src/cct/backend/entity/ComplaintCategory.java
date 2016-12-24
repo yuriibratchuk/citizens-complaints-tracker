@@ -38,14 +38,14 @@ import com.haulmont.cuba.core.entity.HasUuid;
 import java.util.UUID;
 
 /**
- * Ticket category entity.
+ * Complaint category entity.
  *
  * @author Yurii Bratchuk
  */
 @NamePattern("%s|name")
-@Table(name = "CCT_TICKET_CATEGORY")
-@Entity(name = "cct$TicketCategory")
-public class TicketCategory extends BaseIntegerIdEntity implements Versioned, SoftDelete, Updatable, Creatable, HasUuid {
+@Table(name = "CCT_COMPLAINT_CATEGORY")
+@Entity(name = "cct$ComplaintCategory")
+public class ComplaintCategory extends BaseIntegerIdEntity implements Versioned, SoftDelete, Updatable, Creatable, HasUuid {
     private static final long serialVersionUID = 4763577744197789954L;
 
     @Column(name = "NAME", nullable = false)

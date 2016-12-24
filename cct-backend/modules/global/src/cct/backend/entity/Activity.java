@@ -33,7 +33,7 @@ import javax.persistence.ManyToOne;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
 /**
- * Entity of ticket's activity entry.
+ * Entity of complaint's activity entry.
  *
  * @author Yurii Bratchuk
  */
@@ -43,8 +43,8 @@ public class Activity extends StandardEntity {
     private static final long serialVersionUID = 8379342948178801952L;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "TICKET_ID")
-    protected Ticket ticket;
+    @JoinColumn(name = "COMPLAINT_ID")
+    protected Complaint complaint;
 
     @Column(name = "SUBJECT")
     protected String subject;
@@ -53,8 +53,8 @@ public class Activity extends StandardEntity {
     @Column(name = "COMMENT_", nullable = false)
     protected String comment;
 
-    public Ticket getTicket() {
-        return ticket;
+    public Complaint getComplaint() {
+        return complaint;
     }
 
     public void setSubject(String subject) {

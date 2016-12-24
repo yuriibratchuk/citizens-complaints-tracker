@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cct.backend.web.ticket;
+package cct.backend.web.complaint;
 
 import com.haulmont.cuba.gui.components.AbstractLookup;
 
 /**
- * Ticket browser.
+ * Complaint browser.
  *
  * @author Yurii Bratchuk
  */
-public class TicketBrowse extends AbstractLookup {
+public class ComplaintBrowse extends AbstractLookup {
 }
