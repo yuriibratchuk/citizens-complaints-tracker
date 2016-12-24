@@ -1,5 +1,9 @@
--- Ticket categories
+-- TIPS REGARD UPDATING THIS FILE:
+-- Log in as Admin, using
+--       Administration -> (e.g)Roles -> right click on element -> System Information -> Script for insert
+-- get an SQL for pasting here.
 
+-- <editor-fold desc="Ticket categories">
 insert into CCT_TICKET_CATEGORY
 (ID, CREATE_TS, CREATED_BY, UUID, NAME, ENABLED, VERSION, DELETE_TS, DELETED_BY, UPDATE_TS, UPDATED_BY)
 values (1, '2016-08-28 08:45:03', 'admin', 'be6ef31a-fc4d-2c98-be4f-78497c1bb087', 'Other', true, 1, null, null, '2016-08-28 08:45:03', null);
@@ -43,366 +47,277 @@ values (10, '2016-08-28 08:46:49', 'admin', '01c19762-f64c-5ca9-92dd-6e2c03c0890
 insert into CCT_TICKET_CATEGORY
 (ID, CREATE_TS, CREATED_BY, UUID, NAME, ENABLED, VERSION, DELETE_TS, DELETED_BY, UPDATE_TS, UPDATED_BY)
 values (11, '2016-08-28 08:46:54', 'admin', 'a08e3888-d0e3-8d62-7a77-8da9f1d312c4', 'Garbage', true, 1, null, null, '2016-08-28 08:46:54', null);
+-- </editor-fold>
 
--- -- -- Roles
+-- <editor-fold desc="Roles">
 
--- Role: Citizen
-
+-- <editor-fold desc="Role: Citizen">
 insert into SEC_ROLE
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, LOC_NAME, DESCRIPTION, ROLE_TYPE, IS_DEFAULT_ROLE)
-values ('37fba105-aac6-1be6-672d-0025c3fbb07c', 5, '2016-09-02 13:57:16', 'admin', '2016-09-03 12:34:22', 'admin', null, null, 'Citizen', null, null, 0, true);
+values ('37fba105-aac6-1be6-672d-0025c3fbb07c', 7, '2016-09-02 13:57:16', 'admin', '2016-12-24 11:51:07', 'admin', null, null, 'Citizen', null, null, 30, false);
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('a52255d8-16bc-b4fe-2c67-34fa16c825ad', 1, '2016-09-02 15:05:54', 'admin', '2016-09-02 15:05:54', null, null, null, 30, 'cct$Ticket:address', 2, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('95df642f-a5c6-2bec-0c37-2b926ea9a4d7', 1, '2016-12-24 11:39:32', 'admin', '2016-12-24 11:39:32', null, null, null, 30, 'cct$Ticket:plannedDate', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('ab5e257c-050b-7851-1558-e4eff92e6663', 1, '2016-09-02 14:11:24', 'admin', '2016-09-02 14:11:24', null, null, null, 10, 'sec$ScreenHistory.browse', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('14cc9d8b-3781-e29c-ea05-60c5ea4a51b2', 1, '2016-12-22 10:46:45', 'admin', '2016-12-22 10:46:45', null, null, null, 50, 'cct$Ticket.edit:moderationFields', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('40ef51d1-967d-c3ee-aa77-4182b0800d9a', 1, '2016-09-02 15:05:54', 'admin', '2016-09-02 15:05:54', null, null, null, 30, 'cct$Ticket:usergrade', 2, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('d7677474-eb0c-038e-c90d-274cc668afdc', 1, '2016-12-23 09:15:42', 'admin', '2016-12-23 09:15:42', null, null, null, 20, 'cct$TicketCategory:read', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('b95f6e9e-f712-8a6c-0f8f-cc26470f745a', 1, '2016-09-02 15:05:54', 'admin', '2016-09-02 15:05:54', null, null, null, 30, 'cct$Ticket:imageFile', 2, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('b4c2490e-a778-467d-6eaa-0c012ddc315b', 1, '2016-12-22 12:08:12', 'admin', '2016-12-22 12:08:12', null, null, null, 30, 'cct$Ticket:assignee', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('67a02b22-c3e9-fa54-513b-d9d954ce0197', 1, '2016-09-02 13:57:16', 'admin', '2016-09-02 13:57:16', null, null, null, 20, 'cct$Ticket:create', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('021e2f86-9d3d-78fb-74e9-ee8133c322b2', 1, '2016-12-23 09:13:51', 'admin', '2016-12-23 09:13:51', null, null, null, 20, 'cct$Ticket:read', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('1972f987-e3a1-1eec-fbce-584f31bee9c2', 1, '2016-09-02 15:05:54', 'admin', '2016-09-02 15:05:54', null, null, null, 30, 'cct$Ticket:plannedDate', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('88b0bd3c-c1ee-0452-f89e-29deb88d415a', 1, '2016-12-23 09:09:11', 'admin', '2016-12-23 09:09:11', null, null, null, 40, 'cuba.restApi.enabled', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('223c9052-f037-2e8f-4e95-2e9392e588f0', 1, '2016-11-21 13:02:04', 'admin', '2016-11-21 13:02:04', null, null, null, 50, 'cct$Ticket.edit:executorFields', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('5260d627-9eee-e30f-3d38-957c07e131ea', 1, '2016-12-22 12:08:12', 'admin', '2016-12-22 12:08:12', null, null, null, 30, 'cct$Ticket:prioritised', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('8a8ce261-0dc1-b6a2-f196-16056f1ae78e', 1, '2016-09-02 13:57:16', 'admin', '2016-09-02 13:57:16', null, null, null, 20, 'cct$TicketCategory:update', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('436490ef-a21c-8a52-08c2-3212909e87c5', 1, '2016-12-23 17:05:54', 'admin', '2016-12-23 17:05:54', null, null, null, 20, 'sys$FileDescriptor:read', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('1eea9154-7f9c-46e0-20b1-8db020890700', 1, '2016-09-03 21:48:24', 'admin', '2016-09-03 21:48:24', null, null, null, 50, 'cct$Ticket.edit:moderationFields', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('160d2eb4-95cc-d328-7dfd-65f84519116e', 1, '2016-12-22 12:08:12', 'admin', '2016-12-22 12:08:12', null, null, null, 30, 'cct$Ticket:declineReason', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('36986f9f-28cb-b6e9-784d-a0e9fe13fe99', 1, '2016-09-02 15:05:54', 'admin', '2016-09-02 15:05:54', null, null, null, 30, 'cct$Ticket:body', 2, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('f56bc3eb-faa3-ea1d-733d-c54eed8cea90', 1, '2016-12-23 09:13:51', 'admin', '2016-12-23 09:13:51', null, null, null, 20, 'cct$Ticket:create', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('a334fb45-2855-4245-e572-a37457f682da', 1, '2016-09-02 14:17:33', 'admin', '2016-09-02 14:17:33', null, null, null, 50, 'cct$Ticket.browse:filter', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('4bb0661c-8af5-2a1c-2916-aeae34771cd8', 1, '2016-12-23 17:05:54', 'admin', '2016-12-23 17:05:54', null, null, null, 20, 'sys$FileDescriptor:create', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('2c7def8a-1f65-3d6f-5395-7b660de9eba8', 1, '2016-09-02 13:57:16', 'admin', '2016-09-02 13:57:16', null, null, null, 20, 'cct$TicketCategory:delete', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('c263fd2f-0512-232c-0080-97b498f0f7a5', 1, '2016-12-22 12:08:12', 'admin', '2016-12-22 12:08:12', null, null, null, 30, 'cct$Ticket:state', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('592e9a48-c66f-09c1-932e-b407cad6f766', 1, '2016-09-02 14:11:24', 'admin', '2016-09-02 14:11:24', null, null, null, 10, 'printDomain', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('c53c4aca-5977-4b25-1a74-c5424d53a0f4', 1, '2016-12-23 17:10:01', 'admin', '2016-12-23 17:10:01', null, null, null, 20, 'sec$User:read', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('67547525-4ca8-9a70-9809-b9ae2d55924c', 1, '2016-09-02 15:05:54', 'admin', '2016-09-02 15:05:54', null, null, null, 30, 'cct$Ticket:feedback', 2, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('a72ae407-ee75-ecc4-5cde-de3e5554eb7d', 1, '2016-12-23 09:09:11', 'admin', '2016-12-23 09:09:11', null, null, null, 40, 'cuba.gui.loginToClient', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('17640852-ea96-9ae3-63cf-5aa966d5e2e7', 1, '2016-09-02 15:05:54', 'admin', '2016-09-02 15:05:54', null, null, null, 30, 'cct$Ticket:subject', 2, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('6097cf34-66b1-9d5c-be8b-dc102b7715fb', 1, '2016-12-23 09:12:02', 'admin', '2016-12-23 09:12:02', null, null, null, 10, 'cct$Ticket.edit', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('651b2607-232b-520c-7949-14700fcd13d6', 1, '2016-09-02 13:57:16', 'admin', '2016-09-02 13:57:16', null, null, null, 20, 'cct$TicketCategory:create', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('d7fa6066-ae75-2bad-7f13-44567d4f7d17', 1, '2016-12-22 12:08:12', 'admin', '2016-12-22 12:08:12', null, null, null, 30, 'cct$Ticket:executorRemark', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('ec684acf-4448-aa53-9660-31df1062e17c', 1, '2016-09-02 15:05:54', 'admin', '2016-09-02 15:05:54', null, null, null, 30, 'cct$Ticket:category', 2, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('a9fc3a81-77a0-56a0-76e4-9878c0b0326b', 1, '2016-12-23 09:12:02', 'admin', '2016-12-23 09:12:02', null, null, null, 10, 'cct$Ticket.browse', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('ee9cb179-7e31-a880-be66-68b39eeb08b4', 1, '2016-09-02 13:57:16', 'admin', '2016-09-02 13:57:16', null, null, null, 10, 'administration', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+values ('b69ebb5c-33a5-8a74-5bd5-e8a10cb3922b', 1, '2016-12-22 12:08:12', 'admin', '2016-12-22 12:08:12', null, null, null, 30, 'cct$Ticket:moderatorRemark', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
+-- </editor-fold>
 
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('a8ce1a05-1a99-5d93-3001-7269029d1f6a', 1, '2016-09-03 12:14:34', 'admin', '2016-09-03 12:14:34', null, null, null, 30, 'cct$Ticket:createdBy', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('cedc5cd8-de8a-6d48-526f-19bd81dd962d', 1, '2016-09-02 14:17:33', 'admin', '2016-09-02 14:17:33', null, null, null, 50, 'cct$Ticket.browse:removeBtn', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('1d22a6f8-fbd8-5d46-1f96-1afe86f441bd', 3, '2016-09-02 15:05:54', 'admin', '2016-09-02 16:58:04', 'admin', null, null, 30, 'cct$Ticket:state', 2, '37fba105-aac6-1be6-672d-0025c3fbb07c');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('40a957bc-1598-1089-deb0-5a7f9cad054e', 1, '2016-09-17 13:59:24', 'admin', '2016-09-17 13:59:24', null, null, null, 30, 'cct$Ticket:prioritised', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('faeafa4f-a6f1-2e19-6ed1-a74216388d0c', 1, '2016-09-02 15:05:54', 'admin', '2016-09-02 15:05:54', null, null, null, 30, 'cct$Ticket:longitude', 2, '37fba105-aac6-1be6-672d-0025c3fbb07c');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('bee89d9e-bd54-4486-6606-40561cd6f517', 1, '2016-09-02 15:05:54', 'admin', '2016-09-02 15:05:54', null, null, null, 30, 'cct$Ticket:declineReason', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('d5485ca5-4ce7-3fd9-b90e-998129e25488', 1, '2016-09-02 14:11:24', 'admin', '2016-09-02 14:11:24', null, null, null, 10, 'logWindow', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('166fd895-9fb8-b6a3-db35-c6da72b2c344', 1, '2016-09-02 14:17:33', 'admin', '2016-09-02 14:17:33', null, null, null, 50, 'cct$Ticket.browse:refreshBtn', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('1c5905ce-4b6b-7165-9547-3c107f44a2f3', 1, '2016-09-02 15:05:54', 'admin', '2016-09-02 15:05:54', null, null, null, 30, 'cct$Ticket:assignee', 1, '37fba105-aac6-1be6-672d-0025c3fbb07c');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('338a2b48-158f-88fb-48bd-8b4bb5544faf', 1, '2016-09-17 13:59:24', 'admin', '2016-09-17 13:59:24', null, null, null, 30, 'cct$Ticket:emergency', 2, '37fba105-aac6-1be6-672d-0025c3fbb07c');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('3a5d7499-2c88-108e-0963-da5e6d7dd5be', 1, '2016-09-02 15:05:54', 'admin', '2016-09-02 15:05:54', null, null, null, 30, 'cct$Ticket:latitude', 2, '37fba105-aac6-1be6-672d-0025c3fbb07c');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('10143f8d-f3be-60ac-f9a0-8d50c3eba8ad', 1, '2016-09-02 13:57:16', 'admin', '2016-09-02 13:57:16', null, null, null, 20, 'cct$Ticket:delete', 0, '37fba105-aac6-1be6-672d-0025c3fbb07c');
-
--- Role: Moderator
-
+-- <editor-fold desc="Role: Executor">
 insert into SEC_ROLE
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, LOC_NAME, DESCRIPTION, ROLE_TYPE, IS_DEFAULT_ROLE)
-values ('946015f2-cc69-2872-f476-f4825a429029', 1, '2016-09-02 12:51:32', 'admin', '2016-09-02 12:51:32', null, null, null, 'Moderator', null, null, 0, null);
+values ('cc337c4d-9510-6c4c-0495-d6f562f7f762', 2, '2016-09-03 12:26:19', 'admin', '2016-12-23 10:29:43', 'admin', null, null, 'Executor', null, null, 30, null);
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('8ef73554-5a46-8a9c-4f11-85b740fa7904', 1, '2016-09-02 13:58:31', 'admin', '2016-09-02 13:58:31', null, null, null, 10, 'administration', 0, '946015f2-cc69-2872-f476-f4825a429029');
+values ('0b8d00e4-217c-585b-9a94-375563185115', 1, '2016-12-22 12:05:09', 'admin', '2016-12-22 12:05:09', null, null, null, 30, 'cct$Ticket:subject', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('e2331633-2078-66eb-e81a-dd8cc1ebb52f', 1, '2016-09-03 21:49:00', 'admin', '2016-09-03 21:49:00', null, null, null, 50, 'cct$Ticket.edit:feedbackFields', 0, '946015f2-cc69-2872-f476-f4825a429029');
+values ('80c7ef31-69e7-3ae5-f085-69bae11b8a13', 1, '2016-12-22 12:05:09', 'admin', '2016-12-22 12:05:09', null, null, null, 30, 'cct$Ticket:imageFile', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('3b0d6180-2f45-96a0-58ab-cc8b4cec15a7', 1, '2016-09-02 13:55:03', 'admin', '2016-09-02 13:55:03', null, null, null, 20, 'cct$TicketCategory:delete', 0, '946015f2-cc69-2872-f476-f4825a429029');
+values ('c8121f55-2d1d-f5cf-8255-2f6c2161652a', 1, '2016-12-23 17:14:15', 'admin', '2016-12-23 17:14:15', null, null, null, 20, 'sys$FileDescriptor:read', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('498351cb-5cda-f0b4-d5b4-080517fdb9e9', 1, '2016-09-02 13:55:03', 'admin', '2016-09-02 13:55:03', null, null, null, 20, 'cct$TicketCategory:update', 0, '946015f2-cc69-2872-f476-f4825a429029');
+values ('003354ed-0802-1979-fff6-a9fbfa4f0acf', 1, '2016-12-23 19:32:32', 'admin', '2016-12-23 19:32:32', null, null, null, 10, 'help', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('1c7db72f-cfe6-f350-1ffc-d0a264c6de9f', 1, '2016-09-02 15:02:12', 'admin', '2016-09-02 15:02:12', null, null, null, 30, 'cct$Ticket:usergrade', 1, '946015f2-cc69-2872-f476-f4825a429029');
+values ('9720d990-63e3-116c-ceac-c23e54b7cdb3', 1, '2016-12-23 10:29:43', 'admin', '2016-12-23 10:29:43', null, null, null, 40, 'cuba.gui.loginToClient', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('2d8078b9-f6e5-c392-b9b5-d46c1df2c521', 2, '2016-09-02 13:12:33', 'admin', '2016-09-02 13:55:03', 'admin', null, null, 20, 'cct$Ticket:update', 1, '946015f2-cc69-2872-f476-f4825a429029');
+values ('b0a88647-1596-b17e-f69a-7784f3ace61e', 1, '2016-12-23 10:29:43', 'admin', '2016-12-23 10:29:43', null, null, null, 10, 'cct$Ticket.browse', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('73753a67-84ff-b702-a2f5-b82a75fff429', 2, '2016-09-02 13:12:33', 'admin', '2016-09-02 13:55:03', 'admin', null, null, 20, 'cct$Ticket:create', 0, '946015f2-cc69-2872-f476-f4825a429029');
+values ('6fef4583-d9c8-ca59-1398-6e83cf458b6f', 1, '2016-12-23 10:29:43', 'admin', '2016-12-23 10:29:43', null, null, null, 20, 'cct$TicketCategory:read', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('3fb16f1a-ba53-85bd-4984-bd2f32ac79a4', 1, '2016-09-02 15:02:12', 'admin', '2016-09-02 15:02:12', null, null, null, 30, 'cct$Ticket:body', 1, '946015f2-cc69-2872-f476-f4825a429029');
+values ('f272dd67-bcb9-f85f-6b63-75e9c5bd2f89', 1, '2016-12-22 12:05:09', 'admin', '2016-12-22 12:05:09', null, null, null, 30, 'cct$Ticket:address', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('0ac7aa1e-f043-f604-7e90-439c52d6a6e3', 1, '2016-09-02 15:02:12', 'admin', '2016-09-02 15:02:12', null, null, null, 30, 'cct$Ticket:address', 1, '946015f2-cc69-2872-f476-f4825a429029');
+values ('ca2706f0-4a8c-c4e7-9c1d-2bdbd7feec94', 1, '2016-12-22 12:05:09', 'admin', '2016-12-22 12:05:09', null, null, null, 30, 'cct$Ticket:body', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('e7627d10-890c-d2cd-d228-92dcfc93bb3c', 1, '2016-09-02 15:02:12', 'admin', '2016-09-02 15:02:12', null, null, null, 30, 'cct$Ticket:longitude', 1, '946015f2-cc69-2872-f476-f4825a429029');
+values ('3d1b27b5-810c-a65b-0a26-2171284f68b0', 1, '2016-12-23 10:29:43', 'admin', '2016-12-23 10:29:43', null, null, null, 10, 'cct$Ticket.edit', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('e4bf5f46-e235-d445-290d-648b20cd82ee', 1, '2016-09-17 13:35:51', 'admin', '2016-09-17 13:35:51', null, null, null, 30, 'cct$Ticket:emergency', 1, '946015f2-cc69-2872-f476-f4825a429029');
+values ('b4fb3604-9bd0-d716-1f1e-663ac017d59b', 1, '2016-12-23 16:06:37', 'admin', '2016-12-23 16:06:37', null, null, null, 10, 'sec$User.lookup', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('9b58dc8f-cdff-d721-e0b2-43bfb8ca5e63', 1, '2016-09-02 15:02:12', 'admin', '2016-09-02 15:02:12', null, null, null, 30, 'cct$Ticket:imageFile', 1, '946015f2-cc69-2872-f476-f4825a429029');
+values ('d09b48bc-a164-6969-20d4-bba91ee8e1ce', 1, '2016-12-23 16:06:37', 'admin', '2016-12-23 16:06:37', null, null, null, 20, 'sec$User:read', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('04f6a61e-171f-440e-19e9-ad71d2baea14', 1, '2016-09-02 14:02:52', 'admin', '2016-09-02 14:02:52', null, null, null, 50, 'cct$Ticket.browse:removeBtn', 0, '946015f2-cc69-2872-f476-f4825a429029');
+values ('19ca75b3-69d4-b902-d0ed-03fcacc2b86e', 1, '2016-12-23 10:29:43', 'admin', '2016-12-23 10:29:43', null, null, null, 20, 'cct$Ticket:update', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('630611b8-aa57-9c87-b1e0-24e1ec156709', 1, '2016-09-02 13:55:03', 'admin', '2016-09-02 13:55:03', null, null, null, 20, 'cct$TicketCategory:create', 0, '946015f2-cc69-2872-f476-f4825a429029');
+values ('f2ff4c4c-128f-6c7e-9b88-5cc5e84f7633', 1, '2016-12-22 12:05:09', 'admin', '2016-12-22 12:05:09', null, null, null, 30, 'cct$Ticket:longitude', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('b444f584-4ce9-f206-a808-e2e16d9a24a8', 1, '2016-09-02 15:02:12', 'admin', '2016-09-02 15:02:12', null, null, null, 30, 'cct$Ticket:plannedDate', 2, '946015f2-cc69-2872-f476-f4825a429029');
+values ('1110101d-5f82-3d9a-53f5-fe7c4ddc5455', 1, '2016-12-23 10:29:43', 'admin', '2016-12-23 10:29:43', null, null, null, 20, 'cct$Ticket:read', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('72fa1fd2-f0dd-a5b4-a53d-1244e2d37db2', 1, '2016-09-02 13:12:33', 'admin', '2016-09-02 13:12:33', null, null, null, 20, 'cct$Ticket:delete', 0, '946015f2-cc69-2872-f476-f4825a429029');
+values ('05a607f8-4711-7ca8-73ed-f41c43e1948f', 1, '2016-12-23 19:22:40', 'admin', '2016-12-23 19:22:40', null, null, null, 40, 'cuba.gui.filter.edit', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('b7bf0fb1-80b1-ef48-0e1a-60d520b7f736', 1, '2016-09-02 15:02:12', 'admin', '2016-09-02 15:02:12', null, null, null, 30, 'cct$Ticket:declineReason', 2, '946015f2-cc69-2872-f476-f4825a429029');
+values ('b9ed8f2b-0938-7385-9032-8d1a7827208d', 1, '2016-12-23 10:29:43', 'admin', '2016-12-23 10:29:43', null, null, null, 10, 'settings', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('3b7fb8d9-50c4-3d0d-6f8e-5c97a5b0301c', 1, '2016-09-02 14:02:52', 'admin', '2016-09-02 14:02:52', null, null, null, 50, 'cct$Ticket.browse:createBtn', 0, '946015f2-cc69-2872-f476-f4825a429029');
+values ('b0ac75f5-a4c5-ee36-9151-f754bc1ba50d', 1, '2016-12-22 12:05:09', 'admin', '2016-12-22 12:05:09', null, null, null, 30, 'cct$Ticket:prioritised', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('f915fe3d-c4f2-d538-90f2-caa0e32d39c6', 1, '2016-09-02 15:02:12', 'admin', '2016-09-02 15:02:12', null, null, null, 30, 'cct$Ticket:latitude', 1, '946015f2-cc69-2872-f476-f4825a429029');
+values ('fc4c491b-79a2-81e0-35b2-63711be264ee', 1, '2016-12-22 12:05:09', 'admin', '2016-12-22 12:05:09', null, null, null, 30, 'cct$Ticket:latitude', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('c9b9b86a-c1a5-82c1-c0ae-07d3db060031', 1, '2016-11-21 13:01:10', 'admin', '2016-11-21 13:01:10', null, null, null, 50, 'cct$Ticket.edit:executorFields', 0, '946015f2-cc69-2872-f476-f4825a429029');
+values ('3e122a1a-91c8-efc2-212e-f5c012cb7bd8', 1, '2016-12-22 12:05:09', 'admin', '2016-12-22 12:05:09', null, null, null, 30, 'cct$Ticket:emergency', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('1c453e0f-b5aa-3d51-8e7e-42e98d524d0a', 1, '2016-09-02 15:02:12', 'admin', '2016-09-02 15:02:12', null, null, null, 30, 'cct$Ticket:subject', 1, '946015f2-cc69-2872-f476-f4825a429029');
+values ('9e28ea9f-161f-bad1-a607-f081ef925d52', 1, '2016-12-22 12:05:09', 'admin', '2016-12-22 12:05:09', null, null, null, 30, 'cct$Ticket:moderatorRemark', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+-- </editor-fold>
 
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('b2017c6c-31fa-bc5e-4e40-655c014c7c46', 1, '2016-09-02 15:02:12', 'admin', '2016-09-02 15:02:12', null, null, null, 30, 'cct$Ticket:feedback', 1, '946015f2-cc69-2872-f476-f4825a429029');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('e634bb59-9e96-32dd-f818-51589e684011', 1, '2016-09-17 13:35:51', 'admin', '2016-09-17 13:35:51', null, null, null, 30, 'cct$Ticket:prioritised', 2, '946015f2-cc69-2872-f476-f4825a429029');
-
--- Role: Executor
-
+-- <editor-fold desc="Role: Moderator">
 insert into SEC_ROLE
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, LOC_NAME, DESCRIPTION, ROLE_TYPE, IS_DEFAULT_ROLE)
-values ('cc337c4d-9510-6c4c-0495-d6f562f7f762', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 'Executor', null, null, 0, null);
+values ('946015f2-cc69-2872-f476-f4825a429029', 2, '2016-09-02 12:51:32', 'admin', '2016-12-23 10:22:26', 'admin', null, null, 'Moderator', null, null, 30, null);
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('0b665eef-8421-30b1-3348-9cfee15cf2f1', 1, '2016-09-17 14:03:03', 'admin', '2016-09-17 14:03:03', null, null, null, 20, 'cct$Ticket:delete', 0, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('b380401d-47c9-332a-f000-99cdbe00f3b1', 1, '2016-12-23 10:22:26', 'admin', '2016-12-23 10:22:26', null, null, null, 40, 'cuba.gui.loginToClient', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('e8dffa1e-3c57-95a2-a761-bf7b1593eb7b', 1, '2016-09-17 14:03:37', 'admin', '2016-09-17 14:03:37', null, null, null, 20, 'cct$TicketCategory:update', 0, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('9f759ba6-a355-e46b-08e6-bd142537bf6c', 1, '2016-12-22 12:03:38', 'admin', '2016-12-22 12:03:38', null, null, null, 30, 'cct$Ticket:longitude', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('f32d3bba-b743-a594-713b-d589f024a510', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:plannedDate', 2, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('d81ad435-948d-bb4a-9a0f-5d3365946de4', 1, '2016-12-23 10:22:26', 'admin', '2016-12-23 10:22:26', null, null, null, 40, 'cuba.gui.showExceptionDetails', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('a229f9b0-b0ea-247a-ad07-423b1f565ceb', 1, '2016-09-17 13:39:11', 'admin', '2016-09-17 13:39:11', null, null, null, 30, 'cct$Ticket:prioritised', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('961fcf7b-b2b6-59be-4832-5f9bfa966b94', 1, '2016-12-23 10:22:26', 'admin', '2016-12-23 10:22:26', null, null, null, 20, 'cct$Ticket:update', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('05be61b3-1c65-7923-2ecf-e67ef634ed04', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:usergrade', 0, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('115ae9a9-b75d-1d4b-d1c6-2608d36b5527', 1, '2016-12-22 12:03:38', 'admin', '2016-12-22 12:03:38', null, null, null, 30, 'cct$Ticket:subject', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('724624f5-cc63-8921-3c07-50fcd9fc4378', 1, '2016-09-17 14:03:03', 'admin', '2016-09-17 14:03:03', null, null, null, 20, 'cct$Ticket:update', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('063e1dd5-614e-7103-8a8a-dbb06179dd4e', 1, '2016-12-22 12:03:38', 'admin', '2016-12-22 12:03:38', null, null, null, 30, 'cct$Ticket:executorRemark', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('d4b60e1e-0d1e-841c-8d97-a59175486134', 1, '2016-09-04 16:04:49', 'admin', '2016-09-04 16:04:49', null, null, null, 50, 'cct$Ticket.edit:moderationFields', 0, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('ff02cd6a-906d-9d65-8145-7fb0bed486ac', 1, '2016-12-23 10:22:26', 'admin', '2016-12-23 10:22:26', null, null, null, 10, 'cct$Ticket.browse', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('e5ffb186-afa2-4ad9-a730-da5d37b7a74a', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:latitude', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('d120f403-d90c-40ff-40b5-e3345f50842c', 1, '2016-12-23 10:22:26', 'admin', '2016-12-23 10:22:26', null, null, null, 10, 'cct$Ticket.edit', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('b315b9c3-bcdf-cb36-3026-f09c8facb3ba', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 10, 'administration', 0, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('3fc2934d-bf18-7f46-bc20-5ccbfb764182', 1, '2016-12-22 12:03:38', 'admin', '2016-12-22 12:03:38', null, null, null, 30, 'cct$Ticket:imageFile', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('dc751c06-824e-f12f-1ee8-3ab30535372b', 1, '2016-09-17 13:39:11', 'admin', '2016-09-17 13:39:11', null, null, null, 30, 'cct$Ticket:emergency', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('f2f94b90-480a-42dc-b1d3-84895660414a', 1, '2016-12-23 10:30:18', 'admin', '2016-12-23 10:30:18', null, null, null, 10, 'settings', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('1f202578-efdb-d12f-3536-88054e61c964', 1, '2016-09-17 14:03:37', 'admin', '2016-09-17 14:03:37', null, null, null, 20, 'cct$TicketCategory:create', 0, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('f8696bd6-4ceb-b705-22ba-397e110e2dd4', 1, '2016-12-23 10:22:26', 'admin', '2016-12-23 10:22:26', null, null, null, 20, 'cct$TicketCategory:read', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('4c9e2541-dc2b-daff-5557-2b3fb56b38d3', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 50, 'cct$Ticket.browse:removeBtn', 0, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('a3591a08-5a1b-dbc7-68e6-147d0e26e01f', 1, '2016-12-23 17:13:32', 'admin', '2016-12-23 17:13:32', null, null, null, 20, 'sys$FileDescriptor:read', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('76e68c7b-3e2c-133e-d438-90f80362e833', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:address', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('7d805e70-6f49-4f0f-1460-4fca0cc43948', 1, '2016-12-23 19:16:05', 'admin', '2016-12-23 19:16:05', null, null, null, 10, 'help', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('b7c20f14-c7d6-ea0e-e821-f7e998e819b1', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:body', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('6daeb35c-4702-0d9e-4619-2a82bf86ee61', 1, '2016-12-23 10:22:26', 'admin', '2016-12-23 10:22:26', null, null, null, 20, 'cct$Ticket:read', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('b4ea72e6-d6f5-b00c-1376-2313234fc3c0', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:state', 2, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('62b4c5a2-7b48-012d-0941-8623c6923bb6', 1, '2016-12-22 12:03:38', 'admin', '2016-12-22 12:03:38', null, null, null, 30, 'cct$Ticket:body', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('87a82909-5865-6ce8-21d8-271f97efe861', 1, '2016-09-17 14:03:03', 'admin', '2016-09-17 14:03:03', null, null, null, 20, 'cct$Ticket:create', 0, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('2cd7ab09-3af5-861a-7124-d453a60066f3', 1, '2016-12-22 12:03:38', 'admin', '2016-12-22 12:03:38', null, null, null, 30, 'cct$Ticket:emergency', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('bf1c69ba-2c3d-474c-9e9b-b2b5ada87039', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:category', 2, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('8d7206c2-d9f4-17d2-c8c5-1d5faa6f8494', 1, '2016-12-22 12:03:38', 'admin', '2016-12-22 12:03:38', null, null, null, 30, 'cct$Ticket:latitude', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('724a9718-3f22-316e-db83-81ff0fa50e6f', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:imageFile', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('58e7eb7e-065b-9765-8243-cda02383e0dd', 1, '2016-12-22 12:03:38', 'admin', '2016-12-22 12:03:38', null, null, null, 30, 'cct$Ticket:address', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('9e665e88-6bed-ded6-376e-0f27a0ecfb5d', 1, '2016-09-17 14:03:37', 'admin', '2016-09-17 14:03:37', null, null, null, 20, 'cct$TicketCategory:delete', 0, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('b10d6cfa-3c8d-4815-4019-06e295fc3753', 1, '2016-12-23 16:01:45', 'admin', '2016-12-23 16:01:45', null, null, null, 10, 'sec$User.lookup', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('b213dee3-7e90-5624-73f4-903932baacde', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:declineReason', 2, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('847bd18b-3c9e-eb65-8744-058b5ae945d3', 1, '2016-12-23 10:44:34', 'admin', '2016-12-23 10:44:34', null, null, null, 20, 'sec$User:read', 1, '946015f2-cc69-2872-f476-f4825a429029');
 
 insert into SEC_PERMISSION
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('7a8dd979-02bc-6316-c57c-71450ac23c57', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:feedback', 0, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
+values ('ee7dd575-f021-97a0-0dcc-b243755e47a7', 1, '2016-12-23 19:21:45', 'admin', '2016-12-23 19:21:45', null, null, null, 40, 'cuba.gui.filter.edit', 1, '946015f2-cc69-2872-f476-f4825a429029');
+-- </editor-fold>
 
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('0bc6d9eb-0cb9-f570-dce2-c99fc24b2a60', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:longitude', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('f318eae2-3843-8902-f3b8-72a380500e03', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:subject', 1, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('c059a0c9-1cfe-d1a2-a7bf-d36fb9392410', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 50, 'cct$Ticket.browse:createBtn', 0, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('05342541-79e8-ed35-3c9d-bf197c42a719', 1, '2016-09-03 12:26:19', 'admin', '2016-09-03 12:26:19', null, null, null, 30, 'cct$Ticket:assignee', 2, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('095354fb-341d-5990-2c6d-e7b52dc2f807', 1, '2016-09-04 16:29:41', 'admin', '2016-09-04 16:29:41', null, null, null, 50, 'cct$Ticket.edit:feedbackFields', 0, 'cc337c4d-9510-6c4c-0495-d6f562f7f762');
-
--- Role: Guest
-
+-- <editor-fold desc="Role: Guest">
 insert into SEC_ROLE
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, LOC_NAME, DESCRIPTION, ROLE_TYPE, IS_DEFAULT_ROLE)
 values ('89add093-07fb-74e4-7274-c83c3dea8891', 1, '2016-11-06 16:29:35', 'admin', '2016-11-06 16:29:35', null, null, null, 'Guest', null, null, 20, null);
+-- </editor-fold>
 
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('f8dffb20-1e14-3640-d75a-984768772239', 1, '2016-11-06 16:29:35', 'admin', '2016-11-06 16:29:35', null, null, null, 10, 'logWindow', 0, '89add093-07fb-74e4-7274-c83c3dea8891');
+-- </editor-fold>
 
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('af073000-be4f-149f-93f3-4aef10cda3cd', 1, '2016-11-06 16:29:35', 'admin', '2016-11-06 16:29:35', null, null, null, 10, 'administration', 0, '89add093-07fb-74e4-7274-c83c3dea8891');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('ea615da4-542a-ae4b-839c-b92b09418586', 1, '2016-11-06 16:29:35', 'admin', '2016-11-06 16:29:35', null, null, null, 10, 'sec$ScreenHistory.browse', 0, '89add093-07fb-74e4-7274-c83c3dea8891');
-
-insert into SEC_PERMISSION
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE, ROLE_ID)
-values ('4c2fed2f-e78b-5d97-3597-5c5af71e0310', 1, '2016-11-06 16:29:35', 'admin', '2016-11-06 16:29:35', null, null, null, 10, 'printDomain', 0, '89add093-07fb-74e4-7274-c83c3dea8891');
-
--- -- -- Access groups
+-- <editor-fold desc="Access groups">
 
 -- Access group: Staff (Just renaming of default group)
 update SEC_GROUP
@@ -410,7 +325,6 @@ set NAME='Staff'
 where ID='0fa2b1a5-1d68-4d69-9fbd-dff348347f93';
 
 -- Access group: Staff.Admins; Move default admin user there
-
 insert into SEC_GROUP
 (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, PARENT_ID)
 values ('aa1242bf-0ad9-d333-703c-3354fefe09cb', '2016-09-03 12:27:56', 'admin', 1, '2016-09-03 12:27:56', null, null, null, 'Admins', null);
@@ -420,7 +334,6 @@ set GROUP_ID='aa1242bf-0ad9-d333-703c-3354fefe09cb'
 where ID='60885987-1b61-4247-94c7-dff348347f93';
 
 -- Access group: Staff.Executors and constraints
-
 insert into SEC_GROUP
 (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, PARENT_ID)
 values ('97d1aa13-03b6-1b88-a275-3ccbd22acda5', '2016-09-03 12:26:52', 'admin', 1, '2016-09-03 12:26:52', null, null, null, 'Executors', '0fa2b1a5-1d68-4d69-9fbd-dff348347f93');
@@ -429,36 +342,27 @@ insert into SEC_CONSTRAINT
 (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, CHECK_TYPE, OPERATION_TYPE, CODE, ENTITY_NAME, JOIN_CLAUSE, WHERE_CLAUSE, GROOVY_SCRIPT, FILTER_XML, IS_ACTIVE, GROUP_ID)
 values ('90e98b5c-178c-c9f2-d895-8130737c0881', '2016-09-04 10:20:47', 'admin', 1, '2016-09-04 10:20:47', null, null, null, 'db', 'all', null, 'cct$Ticket', null, '{E}.assignee.id = :session$userId', null, null, true, '97d1aa13-03b6-1b88-a275-3ccbd22acda5');
 
-insert into SEC_CONSTRAINT
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, CHECK_TYPE, OPERATION_TYPE, CODE, ENTITY_NAME, JOIN_CLAUSE, WHERE_CLAUSE, GROOVY_SCRIPT, FILTER_XML, IS_ACTIVE, GROUP_ID)
-values ('22e79bdf-7158-75b8-21ba-a20031ece1be', 2, '2016-11-21 12:28:06', 'admin', '2016-11-21 12:38:42', 'admin', null, null, 'db', 'read', null, 'sec$User', null, '{E}.group.id=''97d1aa13-03b6-1b88-a275-3ccbd22acda5'' or {E}.group.id=''307285e3-6b1e-7982-59a0-0ed6e5fa9615''', null, null, true, '97d1aa13-03b6-1b88-a275-3ccbd22acda5');
-
 -- Access group: Staff.Moderators
-
 insert into SEC_GROUP
 (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, PARENT_ID)
 values ('307285e3-6b1e-7982-59a0-0ed6e5fa9615', '2016-09-03 12:27:42', 'admin', 1, '2016-09-03 12:27:42', null, null, null, 'Moderators', '0fa2b1a5-1d68-4d69-9fbd-dff348347f93');
 
-insert into SEC_CONSTRAINT
-(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, CHECK_TYPE, OPERATION_TYPE, CODE, ENTITY_NAME, JOIN_CLAUSE, WHERE_CLAUSE, GROOVY_SCRIPT, FILTER_XML, IS_ACTIVE, GROUP_ID)
-values ('bc5370be-b0c8-372e-d10e-b8c2241c906e', 3, '2016-11-21 12:33:48', 'admin', '2016-11-21 12:47:26', 'admin', null, null, 'db', 'read', null, 'sec$User', null, '{E}.group.id=''97d1aa13-03b6-1b88-a275-3ccbd22acda5''', null, null, true, '307285e3-6b1e-7982-59a0-0ed6e5fa9615');
-
--- Access group: Town citizens and constraints
-
+-- Access group: Citizens and constraints
 insert into SEC_GROUP
 (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, PARENT_ID)
-values ('9b27a9f0-6836-4602-cd87-1824e5017182', '2016-09-02 16:29:17', 'admin', 1, '2016-09-02 16:29:17', null, null, null, 'Town citizens', null);
+values ('9b27a9f0-6836-4602-cd87-1824e5017182', '2016-09-02 16:29:17', 'admin', 1, '2016-09-02 16:29:17', null, null, null, 'Citizens', null);
 
-insert into SEC_CONSTRAINT
-(ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, CHECK_TYPE, OPERATION_TYPE, CODE, ENTITY_NAME, JOIN_CLAUSE, WHERE_CLAUSE, GROOVY_SCRIPT, FILTER_XML, IS_ACTIVE, GROUP_ID)
-values ('eecd9de2-e324-9dd8-0e59-81f08f9285f2', '2016-09-04 10:18:43', 'admin', 1, '2016-09-04 10:18:43', null, null, null, 'db', 'all', null, 'cct$Ticket', null, '{E}.createdBy = :session$userLogin', null, null, true, '9b27a9f0-6836-4602-cd87-1824e5017182');
-
+-- full access to accepted tickets or created by itself
 insert into SEC_CONSTRAINT
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, CHECK_TYPE, OPERATION_TYPE, CODE, ENTITY_NAME, JOIN_CLAUSE, WHERE_CLAUSE, GROOVY_SCRIPT, FILTER_XML, IS_ACTIVE, GROUP_ID)
-values ('2266cc94-2600-45bf-a960-027480b66092', 1, '2016-11-21 12:44:26', 'admin', '2016-11-21 12:44:26', null, null, null, 'db', 'read', null, 'sec$User', null, '{E}.group.id=''97d1aa13-03b6-1b88-a275-3ccbd22acda5'' or {E}.group.id=''307285e3-6b1e-7982-59a0-0ed6e5fa9615''', null, null, true, '9b27a9f0-6836-4602-cd87-1824e5017182');
+values ('eecd9de2-e324-9dd8-0e59-81f08f9285f2', 2, '2016-09-04 10:18:43', 'admin', '2016-12-22 12:26:02', 'admin', null, null, 'db', 'all', null, 'cct$Ticket', null, '{E}.createdBy = :session$userLogin or {E}.state is not NULL', null, null, true, '9b27a9f0-6836-4602-cd87-1824e5017182');
+
+-- allow to read user information of itself or users in the following groups: executors, moderators
+insert into SEC_CONSTRAINT
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, CHECK_TYPE, OPERATION_TYPE, CODE, ENTITY_NAME, JOIN_CLAUSE, WHERE_CLAUSE, GROOVY_SCRIPT, FILTER_XML, IS_ACTIVE, GROUP_ID)
+values ('2266cc94-2600-45bf-a960-027480b66092', 2, '2016-11-21 12:44:26', 'admin', '2016-12-22 12:27:47', 'admin', null, null, 'db', 'read', null, 'sec$User', null, '{E}.group.id=''97d1aa13-03b6-1b88-a275-3ccbd22acda5'' or {E}.group.id=''307285e3-6b1e-7982-59a0-0ed6e5fa9615'' or {E}.id = :session$userId', null, null, true, '9b27a9f0-6836-4602-cd87-1824e5017182');
 
 -- Access group: Guests; Move anonymous user there
-
 insert into SEC_GROUP
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, PARENT_ID)
 values ('280ee603-238e-ac5d-bfbf-ffc97d381b5a', 2, '2016-11-05 19:04:02', 'admin', '2016-11-05 19:04:25', 'admin', null, null, 'Guests', null);
@@ -467,10 +371,13 @@ update SEC_USER
 set GROUP_ID='280ee603-238e-ac5d-bfbf-ffc97d381b5a'
 where ID='a405db59-e674-4f63-8afe-269dda788fe8';
 
--- -- -- Role assignments
+-- </editor-fold>
+
+-- <editor-fold desc="Role assignments">
 
 -- Guest role to anonymous user
-
 insert into SEC_USER_ROLE
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID)
 values ('d6273817-4443-391e-e0f2-503077b90646', null, null, null, null, null, null, null, 'a405db59-e674-4f63-8afe-269dda788fe8', '89add093-07fb-74e4-7274-c83c3dea8891');
+
+-- </editor-fold>

@@ -42,8 +42,6 @@ import org.vaadin.addon.leaflet.LMap;
 import org.vaadin.addon.leaflet.LMarker;
 import org.vaadin.addon.leaflet.LOpenStreetMapLayer;
 import org.vaadin.addon.leaflet.shared.Point;
-import org.vaadin.teemu.ratingstars.RatingStars;
-import cct.backend.entity.Satisfaction;
 import cct.backend.entity.Ticket;
 
 import javax.imageio.ImageIO;
@@ -51,7 +49,6 @@ import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -71,8 +68,6 @@ public class TicketEdit extends AbstractEditor<Ticket> {
     private ComponentsFactory componentsFactory;
     @Inject
     private FieldGroup mainEditableFields;
-    @Inject
-    private FieldGroup feedbackFields;
 
 
     @Inject
@@ -98,37 +93,9 @@ public class TicketEdit extends AbstractEditor<Ticket> {
 
 
     private LMap leafletMap = new LMap();
-    private RatingStars usergrade = new RatingStars();
-
-    private static Map<Integer, String> valueCaptions = new HashMap<>(5);
-
-    static {
-        valueCaptions.put(1, "Not satisfied");
-        valueCaptions.put(2, "Poor");
-        valueCaptions.put(3, "Satisfied");
-        valueCaptions.put(4, "Good");
-        valueCaptions.put(5, "Excellent");
-    }
 
     @Override
     public void init(Map<String, Object> params) {
-
-        // Usergrade setup
-        usergrade.setMaxValue(5);
-        usergrade.setValueCaption(valueCaptions.values().toArray(new String[5]));
-
-        feedbackFields.addCustomField("usergrade", (datasource, propertyId) -> {
-            Component box = componentsFactory.createComponent(VBoxLayout.class);
-            Layout layout = (Layout) WebComponentsHelper.unwrap(box);
-            layout.addComponent(usergrade);
-
-            usergrade.addValueChangeListener(event -> {
-                Double value = (Double) event.getProperty().getValue();
-                datasource.getItem().setValue(propertyId, value != null ? Satisfaction.fromId(value.intValue()) : null);
-            });
-
-            return box;
-        });
 
         // Map setup
         leafletMap.setZoomLevel(15);
@@ -202,11 +169,6 @@ public class TicketEdit extends AbstractEditor<Ticket> {
 
     @Override
     protected void postInit() {
-
-        // Fill usergrade
-        Satisfaction satisfaction = getItem().getUsergrade();
-        if (satisfaction != null)
-            usergrade.setValue(Double.valueOf(satisfaction.getId()));
 
         // Post init attached image
         displayImage();

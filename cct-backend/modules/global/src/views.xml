@@ -15,13 +15,13 @@
                   view="_minimal"/>
         <property name="latitude"/>
         <property name="longitude"/>
-        <property name="feedback"/>
         <property name="declineReason"/>
-        <property name="usergrade"/>
         <property name="imageFile"
                   view="_local">
         </property>
         <property name="emergency"/>
         <property name="prioritised"/>
+        <property name="executorRemark"/>
+        <property name="moderatorRemark"/>
     </view>
 </views>

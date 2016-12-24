@@ -58,8 +58,8 @@ public class Ticket extends BaseLongIdEntity implements Versioned, SoftDelete, U
     @Column(name = "BODY_", nullable = false)
     protected String body;
 
-    @Column(name = "STATE", nullable = false)
-    protected Integer state = TicketState.CREATED.ordinal();
+    @Column(name = "STATE")
+    protected Integer state;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ASSIGNEE_ID")
@@ -89,12 +89,6 @@ public class Ticket extends BaseLongIdEntity implements Versioned, SoftDelete, U
     @Column(name = "DECLINE_REASON")
     protected String declineReason;
 
-    @Column(name = "USERGRADE")
-    protected Integer usergrade;
-
-    @Column(name = "FEEDBACK", length = 600)
-    protected String feedback;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IMAGE_FILE_ID")
     protected FileDescriptor imageFile;
@@ -104,6 +98,14 @@ public class Ticket extends BaseLongIdEntity implements Versioned, SoftDelete, U
 
     @Column(name = "PRIORITISED")
     protected Boolean prioritised = false;
+
+    @Lob
+    @Column(name = "MODERATOR_REMARK")
+    protected String moderatorRemark;
+
+    @Lob
+    @Column(name = "EXECUTOR_REMARK")
+    protected String executorRemark;
 
     @Version
     @Column(name = "VERSION", nullable = false)
@@ -130,6 +132,23 @@ public class Ticket extends BaseLongIdEntity implements Versioned, SoftDelete, U
 
     @Column(name = "UUID")
     private UUID uuid;
+
+    public void setModeratorRemark(String moderatorRemark) {
+        this.moderatorRemark = moderatorRemark;
+    }
+
+    public String getModeratorRemark() {
+        return moderatorRemark;
+    }
+
+    public void setExecutorRemark(String executorRemark) {
+        this.executorRemark = executorRemark;
+    }
+
+    public String getExecutorRemark() {
+        return executorRemark;
+    }
+
 
     @Override
     public void setUuid(UUID uuid) {
@@ -189,23 +208,7 @@ public class Ticket extends BaseLongIdEntity implements Versioned, SoftDelete, U
         return imageFile;
     }
 
-    public Satisfaction getUsergrade() {
-        return usergrade == null ? null : Satisfaction.fromId(usergrade);
-    }
 
-    public void setUsergrade(Satisfaction usergrade) {
-        this.usergrade = usergrade == null ? null : usergrade.getId();
-    }
-
-
-
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
-    }
-
-    public String getFeedback() {
-        return feedback;
-    }
 
     public void setDeclineReason(String declineReason) {
         this.declineReason = declineReason;

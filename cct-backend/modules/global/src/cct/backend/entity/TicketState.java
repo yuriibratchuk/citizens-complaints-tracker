@@ -35,11 +35,10 @@ import javax.annotation.Nullable;
  */
 public enum TicketState implements EnumClass<Integer> {
 
-    CREATED(0),
-    OPENED(1),
-    IN_PROGRESS(2),
-    CLOSED(3),
-    DECLINED(4);
+    ACCEPTED(0),
+    IN_PROGRESS(1),
+    CLOSED(2),
+    DECLINED(3);
 
     private Integer id;
 

@@ -22,7 +22,6 @@
   ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   ~ SOFTWARE.
   -->
-
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
         caption="msg://editCaption"
         class="cct.backend.web.ticket.TicketEdit"
@@ -39,9 +38,17 @@
                 <![CDATA[select e from cct$TicketCategory e where e.enabled = true]]>
             </query>
         </collectionDatasource>
+        <collectionDatasource id="userExtsDs"
+                              class="cct.backend.entity.UserExt"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from cct$UserExt e where e.group.id != '9b27a9f0-6836-4602-cd87-1824e5017182' and e.group.id != '280ee603-238e-ac5d-bfbf-ffc97d381b5a']]>
+            </query>
+        </collectionDatasource>
     </dsContext>
     <layout spacing="true">
-        <scrollBox height="100%">
+        <scrollBox height="100%"
+                   scrollBars="both">
             <hbox spacing="true">
                 <vbox margin="false,false,true,false">
                     <fieldGroup id="mainEditableFields"
@@ -57,6 +64,7 @@
                                    width="640px"/>
                             <field id="emergency"/>
                             <field id="address"
+                                   rows="3"
                                    width="450px"/>
                             <field id="map"
                                    caption="On the map"
@@ -96,36 +104,17 @@
                                    width="250px"/>
                             <field id="prioritised"/>
                             <field id="assignee"
+                                   optionsDatasource="userExtsDs"
                                    width="250px"/>
                             <field id="plannedDate"
                                    width="250px"/>
                             <field id="declineReason"
                                    rows="2"
                                    width="250px"/>
-                        </column>
-                    </fieldGroup>
-                    <fieldGroup id="feedbackFields"
-                                border="visible"
-                                caption="Feedback"
-                                datasource="ticketDs">
-                        <column width="250px">
-                            <field id="usergrade"
-                                   custom="true"/>
-                            <field id="feedback"
-                                   rows="3"/>
-                        </column>
-                    </fieldGroup>
-                    <fieldGroup id="executorFields"
-                                border="visible"
-                                caption="Executor panel"
-                                datasource="ticketDs">
-                        <column>
-                            <field id="state"
+                            <field id="executorRemark"
+                                   rows="3"
                                    width="250px"/>
-                            <field id="assignee"/>
-                            <field id="plannedDate"
-                                   width="250px"/>
-                            <field id="declineReason"
+                            <field id="moderatorRemark"
                                    rows="4"
                                    width="250px"/>
                         </column>

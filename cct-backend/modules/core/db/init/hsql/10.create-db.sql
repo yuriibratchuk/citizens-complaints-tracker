@@ -12,7 +12,7 @@ create table CCT_TICKET (
     --
     SUBJECT varchar(255) not null,
     BODY_ longvarchar not null,
-    STATE integer not null,
+    STATE integer,
     ASSIGNEE_ID varchar(36),
     PLANNED_DATE date,
     CLOSED_DATE date,
@@ -21,11 +21,11 @@ create table CCT_TICKET (
     LATITUDE double precision,
     LONGITUDE double precision,
     DECLINE_REASON varchar(255),
-    USERGRADE integer,
-    FEEDBACK varchar(600),
     IMAGE_FILE_ID varchar(36),
     EMERGENCY boolean,
     PRIORITISED boolean,
+    MODERATOR_REMARK longvarchar,
+    EXECUTOR_REMARK longvarchar,
     --
     primary key (ID)
 )^-- end CCT_TICKET
