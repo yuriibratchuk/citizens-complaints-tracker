@@ -1,0 +1,24 @@
+version: '2.1'
+
+services:
+  cct-backend:
+    image: cct-backend
+    ports:
+     - "8080:8080"
+    networks:
+      - backend-database-network
+  cct-database:
+    image: postgres
+    ports:
+     - "5433:5432"
+    environment:
+      - POSTGRES_DB=CctDatabaseProd
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes: 
+      - ~/Storage/CctDatabaseProd:/var/lib/postgresql/data/pgdata
+    networks:
+      - backend-database-network
+
+networks:
+  backend-database-network:

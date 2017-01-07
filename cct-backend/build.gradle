@@ -64,7 +64,7 @@ SOFTWARE.''' // Copyright Notice for IDEA project
     }
 }
 
-def hsql = 'org.hsqldb:hsqldb:2.2.9'
+def postgres = 'org.postgresql:postgresql:9.4-1201-jdbc41'
 
 configure([globalModule, coreModule, guiModule, webModule, webToolkitModule]) {
     apply(plugin: 'java')
@@ -105,8 +105,8 @@ configure(coreModule) {
     dependencies {
         compile(globalModule)
         provided(servletApi)
-        jdbc(hsql)
-        testRuntime(hsql)
+        jdbc(postgres)
+        testRuntime(postgres)
 
     }
 
@@ -125,21 +125,19 @@ configure(coreModule) {
     }
 
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
-        dbms = 'hsql'
-        dbmsVersion = 'null'
+        dbms = 'postgres'
         host = 'localhost'
-        dbName = 'cct'
-        dbUser = 'sa'
-        dbPassword = ''
+        dbName = 'CctDatabaseDev'
+        dbUser = 'postgres'
+        dbPassword = 'postgres'
     }
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
-        dbms = 'hsql'
-        dbmsVersion = 'null'
+        dbms = 'postgres'
         host = 'localhost'
-        dbName = 'cct'
-        dbUser = 'sa'
-        dbPassword = ''
+        dbName = 'CctDatabaseDev'
+        dbUser = 'postgres'
+        dbPassword = 'postgres'
     }
 }
 
@@ -274,6 +272,14 @@ task restart(dependsOn: ['stop', ':app-core:deploy', ':app-web:deploy', ':app-we
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.13'
+}
+
+task buildWar(type: CubaWarBuilding) {
+    coreProject = project(':app-core')
+    webProject = project(':app-web')
+    appName = 'app'
+    appHome = '/opt/cct_home'
+    singleWar = false
 }
 
 apply from: 'extra.gradle'
