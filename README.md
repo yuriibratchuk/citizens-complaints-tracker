@@ -10,7 +10,7 @@ Quickstart
 * Create database *CctDatabaseDev*
 * Make sure correct database connection settings configured in project properties (*Project Properties > Edit*)
   * Database type: *PostgreSQL*
-  * Database url: *jdbc:postgresql://localhost:5423/CctDatabaseDev*
+  * Database url: *jdbc:postgresql://localhost:5432/CctDatabaseDev*
   * Database user: *postgres* 
   * password: *postgres*
 * Downloading project repository from Github using Git <http://git-scm.com>

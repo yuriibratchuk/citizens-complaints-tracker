@@ -12,7 +12,7 @@ docker run --name dev_cct-database -d -p 5432:5432 -v ~/Storage/CctDatabaseDev:/
 Open Cuba Studio.
 Make sure correct database connection settings configured in project properties (*Project Properties > Edit*)
   * Database type: *PostgreSQL*
-  * Database url: *jdbc:postgresql://localhost:5423/CctDatabaseDev*
+  * Database url: *jdbc:postgresql://localhost:5432/CctDatabaseDev*
   * Database user: *postgres* 
   * password: *postgres*
 
