@@ -1,1 +1,0 @@
-Web UI for Town Improvements Traker app
