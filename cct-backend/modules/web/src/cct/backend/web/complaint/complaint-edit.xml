@@ -42,7 +42,7 @@
                               class="cct.backend.entity.UserExt"
                               view="_minimal">
             <query>
-                <![CDATA[select e from cct$UserExt e where e.group.id != '9b27a9f0-6836-4602-cd87-1824e5017182' and e.group.id != '280ee603-238e-ac5d-bfbf-ffc97d381b5a']]>
+                <![CDATA[select e from cct$UserExt e where e.group.id <> '9b27a9f0-6836-4602-cd87-1824e5017182' and e.group.id <> '280ee603-238e-ac5d-bfbf-ffc97d381b5a']]>
             </query>
         </collectionDatasource>
     </dsContext>
