@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.4.0'
+    ext.cubaVersion = '6.5-SNAPSHOT'
     repositories {
         maven {
             url 'https://repo.cuba-platform.com/content/groups/work'
@@ -13,7 +13,6 @@ buildscript {
     }
     dependencies {
         classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
-        classpath "com.haulmont.cuba:cuba-global:$cubaVersion"
     }
 }
 
@@ -63,6 +62,11 @@ SOFTWARE.''' // Copyright Notice for IDEA project
         vcs = 'Git'
     }
 }
+
+dependencies {
+    appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
+}
+
 
 def postgres = 'org.postgresql:postgresql:9.4-1201-jdbc41'
 
