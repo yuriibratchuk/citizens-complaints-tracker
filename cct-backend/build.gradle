@@ -10,6 +10,8 @@ buildscript {
             }
         }
         
+        
+        
     }
     dependencies {
         classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
@@ -21,6 +23,7 @@ def coreModule = project(':app-core')
 def guiModule = project(':app-gui')
 def webModule = project(':app-web')
 def webToolkitModule = project(':app-web-toolkit')
+def polymerClientModule = project(':app-polymer-client')
 
 def servletApi = 'org.apache.tomcat:tomcat-servlet-api:8.0.26'
 
@@ -58,17 +61,17 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.''' // Copyright Notice for IDEA project
+SOFTWARE.''' // Copyright Notice for IDEA project  
         vcs = 'Git'
     }
 }
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
+
 }
 
-
-def postgres = 'org.postgresql:postgresql:9.4-1201-jdbc41'
+def postgres = 'org.postgresql:postgresql:9.4.1212'
 
 configure([globalModule, coreModule, guiModule, webModule, webToolkitModule]) {
     apply(plugin: 'java')
@@ -91,11 +94,8 @@ configure([globalModule, coreModule, guiModule, webModule, webToolkitModule]) {
 }
 
 configure(globalModule) {
-    dependencies {
-
-    }
-
     task enhance(type: CubaEnhancing)
+
     
 }
 
@@ -114,11 +114,13 @@ configure(coreModule) {
 
     }
 
-    task cleanConf(description: 'Cleans up conf directory') << {
-        def dir = new File(cuba.tomcat.dir, '/conf/app-core')
-        if (dir.isDirectory()) {
-            ant.delete(includeemptydirs: true) {
-                fileset(dir: dir, includes: '**/*', excludes: 'local.app.properties')
+    task cleanConf(description: 'Cleans up conf directory') {
+        doLast {
+            def dir = new File(cuba.tomcat.dir, '/conf/app-core')
+            if (dir.isDirectory()) {
+                ant.delete(includeemptydirs: true) {
+                    fileset(dir: dir, includes: '**/*', excludes: 'local.app.properties')
+                }
             }
         }
     }
@@ -161,7 +163,6 @@ configure(guiModule) {
 configure(webModule) {
     configurations {
         webcontent
-        
     }
 
     dependencies {
@@ -171,16 +172,16 @@ configure(webModule) {
         compile('org.vaadin.addons:ratingstars:2.1')
 
     }
-
+    
     jar {
         with copySpec {
             from sourceSets.main.allJava
             include "cct/backend/web/toolkit/ui/client/**"
         }
     }
-
-
+    
     task webArchive(type: Zip) {
+        from file("$buildDir/web")
         from file('web')
         classifier = 'web'
     }
@@ -200,11 +201,13 @@ configure(webModule) {
     }
     deployConf.dependsOn clearMessagesCache
 
-    task cleanConf(description: 'Cleans up conf directory') << {
-        def dir = new File(cuba.tomcat.dir, '/conf/app')
-        if (dir.isDirectory()) {
-            ant.delete(includeemptydirs: true) {
-                fileset(dir: dir, includes: '**/*', excludes: 'local.app.properties')
+    task cleanConf(description: 'Cleans up conf directory') {
+        doLast {
+            def dir = new File(cuba.tomcat.dir, '/conf/app')
+            if (dir.isDirectory()) {
+                ant.delete(includeemptydirs: true) {
+                    fileset(dir: dir, includes: '**/*', excludes: 'local.app.properties')
+                }
             }
         }
     }
@@ -218,7 +221,7 @@ configure(webModule) {
 configure(webToolkitModule) {
     dependencies {
         compile(webModule)
-        runtime(servletApi)
+
 
     }
 
@@ -226,14 +229,13 @@ configure(webToolkitModule) {
         from sourceSets.main.allJava
     }
 
-
     task buildWidgetSet(type: CubaWidgetSetBuilding) {
         widgetSetClass = 'cct.backend.web.toolkit.ui.AppWidgetSet'
     }
-    
+
     task debugWidgetSet(type: CubaWidgetSetDebug) {
         widgetSetClass = 'cct.backend.web.toolkit.ui.AppWidgetSet'
-    } 
+    }
 
     task webArchive(dependsOn: buildWidgetSet, type: Zip) {
         from file("$buildDir/web")
@@ -244,46 +246,72 @@ configure(webToolkitModule) {
         archives webArchive
     }
 
-    task deploy(dependsOn: buildWidgetSet) << {
-        delete {
-            "$cuba.tomcat.dir/webapps/app/VAADIN/widgetsets"
-        }
-        copy {
-            from "$buildDir/web"
-            into "$cuba.tomcat.dir/webapps/app"
-            exclude '**/gwt-unitCache/'
+    task deploy(dependsOn: buildWidgetSet) {
+        doLast {
+            delete {
+                "$cuba.tomcat.dir/webapps/app/VAADIN/widgetsets"
+            }
+            copy {
+                from "$buildDir/web"
+                into "$cuba.tomcat.dir/webapps/app"
+            }
         }
     }
 }
 
 
 
+
+
+configure(polymerClientModule) {
+    apply(plugin: 'cuba')
+    apply(plugin: 'idea')
+
+    task installBowerPackages(type: NodeTask, dependsOn: npmInstall) {
+        script = file("node_modules/bower/bin/bower")
+        args = ['install','-F']
+        inputs.file "bower.json"
+        outputs.dir "bower_components"
+    }
+
+    task assemble(type: NodeTask, dependsOn: installBowerPackages) {
+        script = file("node_modules/gulp/bin/gulp.js")
+        args = ['build']
+        inputs.dir "./"
+        outputs.dir "build"
+    }
+
+    task servePolymer(type: NodeTask, dependsOn: assemble) {
+        script = file("node_modules/gulp/bin/gulp.js")
+        args = ['serve']
+    }
+
+    task deploy(type: Copy, dependsOn: assemble) {
+        from file('build/bundled')
+        into "$cuba.tomcat.dir/webapps/app-front"
+    }
+}
 
 task undeploy(type: Delete, dependsOn: ':app-web:cleanConf') {
     delete("$cuba.tomcat.dir/shared")
     delete("$cuba.tomcat.dir/webapps/app-core")
     delete("$cuba.tomcat.dir/webapps/app")
+    delete("$cuba.tomcat.dir/webapps/app-front")
 }
 
-task restart(dependsOn: ['stop', ':app-core:deploy', ':app-web:deploy', ':app-web-toolkit:deploy'], description: 'Redeploys applications and restarts local Tomcat') << {
-    ant.waitfor(maxwait: 6, maxwaitunit: 'second', checkevery: 2, checkeveryunit: 'second') {
-        not {
-            socket(server: 'localhost', port: '8787')
+task restart(dependsOn: ['stop', ':app-core:deploy', ':app-web:deploy', ':app-web-toolkit:deploy'], description: 'Redeploys applications and restarts local Tomcat') {
+    doLast {
+        ant.waitfor(maxwait: 6, maxwaitunit: 'second', checkevery: 2, checkeveryunit: 'second') {
+            not {
+                socket(server: 'localhost', port: '8787')
+            }
         }
+        start.execute()
     }
-    start.execute()
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.1'
-}
-
-task buildWar(type: CubaWarBuilding) {
-    coreProject = project(':app-core')
-    webProject = project(':app-web')
-    appName = 'app'
-    appHome = '/opt/cct_home'
-    singleWar = false
 }
 
 apply from: 'extra.gradle'
