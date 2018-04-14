@@ -1,0 +1,105 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../../bower_components/cuba-app/cuba-localize-behavior.html">
+<link rel="import" href="../../bower_components/cuba-ui/cuba-entity-list-view-behavior.html">
+<link rel="import" href="../../bower_components/cuba-data/cuba-entities.html">
+<link rel="import" href="../../bower_components/cuba-styles/cuba-styles.html">
+<link rel="import" href="../shared-styles.html">
+
+
+<dom-module id="cct-complaint-list">
+  <template>
+    <style include="cuba-styles"></style>
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+      }
+      paper-card {
+        cursor: pointer;
+      }
+    </style>
+
+    <cuba-entities id="data"
+                   entity-name="cct$Complaint"
+                   data="{{entities}}"
+                   view="complaintWithAssignee"
+                   loading="{{dataLoading}}"
+                   limit="10"
+                   provide-count="true"
+                   count="{{entitiesCount}}"
+                   auto="[[active]]">
+    </cuba-entities>
+
+    <iron-selector id="selector" on-iron-activate="_handleSelectionChange">
+      <template id="entitiesList" is="dom-repeat" items="{{entities}}">
+        <paper-card heading="[[item._instanceName]]" on-tap="_handleItemTap" class="page-widget">
+          <div class="card-content">
+            [[msg('cct$Complaint.id')]]: [[item.id]]<br>
+
+[[msg('cct$Complaint.version')]]: [[item.version]]<br>
+
+[[msg('cct$Complaint.deleteTs')]]: [[item.deleteTs]]<br>
+
+[[msg('cct$Complaint.deletedBy')]]: [[item.deletedBy]]<br>
+
+[[msg('cct$Complaint.updateTs')]]: [[item.updateTs]]<br>
+
+[[msg('cct$Complaint.updatedBy')]]: [[item.updatedBy]]<br>
+
+[[msg('cct$Complaint.createTs')]]: [[item.createTs]]<br>
+
+[[msg('cct$Complaint.createdBy')]]: [[item.createdBy]]<br>
+
+[[msg('cct$Complaint.uuid')]]: [[item.uuid]]<br>
+
+[[msg('cct$Complaint.subject')]]: [[item.subject]]<br>
+
+[[msg('cct$Complaint.state')]]: [[item.state]]<br>
+
+[[msg('cct$Complaint.assignee')]]: [[item.assignee]]<br>
+
+[[msg('cct$Complaint.plannedDate')]]: [[item.plannedDate]]<br>
+
+[[msg('cct$Complaint.address')]]: [[item.address]]<br>
+
+[[msg('cct$Complaint.body')]]: [[item.body]]<br>
+
+[[msg('cct$Complaint.closedDate')]]: [[item.closedDate]]<br>
+
+[[msg('cct$Complaint.category')]]: [[item.category]]<br>
+
+[[msg('cct$Complaint.latitude')]]: [[item.latitude]]<br>
+
+[[msg('cct$Complaint.longitude')]]: [[item.longitude]]<br>
+
+[[msg('cct$Complaint.declineReason')]]: [[item.declineReason]]<br>
+
+[[msg('cct$Complaint.imageFile')]]: [[item.imageFile]]<br>
+
+[[msg('cct$Complaint.emergency')]]: [[item.emergency]]<br>
+
+[[msg('cct$Complaint.prioritised')]]: [[item.prioritised]]<br>
+
+[[msg('cct$Complaint.executorRemark')]]: [[item.executorRemark]]<br>
+
+[[msg('cct$Complaint.moderatorRemark')]]: [[item.moderatorRemark]]<br>
+
+
+          </div>
+        </paper-card>
+      </template>
+    </iron-selector>
+
+    <paper-button on-tap="_loadMore" class="load-more" hidden$="[[!moreDataAvailable]]">
+      [[msg('Load more')]]
+    </paper-button>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'cct-complaint-list',
+      behaviors: [CubaLocalizeBehavior, CubaEntityListViewBehavior]
+    });
+  </script>
+</dom-module>

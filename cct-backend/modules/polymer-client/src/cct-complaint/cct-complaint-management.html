@@ -1,0 +1,110 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/cuba-app/cuba-localize-behavior.html">
+<link rel="import" href="../../bower_components/cuba-styles/cuba-styles.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="cct-complaint-list.html">
+<link rel="import" href="cct-complaint-edit.html">
+
+<dom-module id="cct-complaint-management">
+  <template>
+    <style include="shared-styles"></style>
+    <style include="cuba-styles"></style>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <app-route route="[[route]]"
+               pattern="/:action"
+               data="{{actionRouteData}}"
+               tail="{{actionRouteTail}}"
+               active="{{actionRouteActive}}"></app-route>
+
+    <app-route route="[[actionRouteTail]]"
+               pattern="/:id"
+               data="{{idRouteData}}"
+               active="{{idRouteActive}}"></app-route>
+
+    <template is="dom-if" if="[[showEditor]]" restamp="true">
+      <cct-complaint-edit entity-id="[[editedEntityId]]"
+                       on-commit="_onEditorCommit"
+                       on-cancel="_closeEditor"
+                       on-delete="_deleteEntity"></cct-complaint-edit>
+    </template>
+
+    <template is="dom-if" if="[[!showEditor]]">
+      <paper-toolbar id="toolbar" class="list-toolbar">
+        <span class="title">
+          <paper-spinner active="[[dataLoading]]"></paper-spinner>
+        </span>
+        <paper-icon-button icon="refresh" on-tap="_reload"></paper-icon-button>
+        <paper-icon-button icon="add" on-tap="_createEntity"></paper-icon-button>
+      </paper-toolbar>
+      <cct-complaint-list id="list"
+                            active="[[active]]"
+                            on-item-tap="_editEntity"
+                            data-loading="{{dataLoading}}"></cct-complaint-list>
+    </template>
+
+    <paper-toast id="successMessage">[[msg('Successfully saved')]]</paper-toast>
+    <paper-toast id="errorMessage">[[msg('Failed to save')]]</paper-toast>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'cct-complaint-management',
+      behaviors: [CubaLocalizeBehavior],
+      properties: {
+        route: Object,
+        showEditor: {
+          type: Boolean,
+          computed: '_computeShowEditor(route, active, actionRouteActive)',
+          value: false
+        },
+        editedEntityId: {
+          type: String,
+          computed: '_computeEditedEntityId(route, idRouteActive, idRouteData.id)'
+        },
+        active: {
+          type: Boolean,
+          value: false
+        }
+      },
+      _computeShowEditor: function() {
+        return this.active && this.actionRouteActive;
+      },
+      _computeEditedEntityId: function() {
+        return this.idRouteActive ? this.idRouteData.id : null;
+      },
+      _reload: function() {
+        this.$$('#list').reload();
+      },
+      _createEntity: function() {
+        this.fire('navigate', this.route.prefix + '/new');
+      },
+      _editEntity: function(event, detail) {
+        this.fire('navigate', this.route.prefix + '/edit/' +  detail.id);
+      },
+      _deleteEntity: function(event, detail) {
+        var listComponent = this.$$('#list');
+        if (listComponent) {
+          listComponent.remove(detail.entity);
+        }
+        this._closeEditor();
+      },
+      _onEditorCommit: function() {
+        var listComponent = this.$$('#list');
+        if (listComponent) {
+          listComponent.reload();
+        }
+        this.$.successMessage.open();
+        this._closeEditor();
+      },
+      _closeEditor: function() {
+        this.fire('navigate', this.route.prefix);
+      }
+    });
+  </script>
+</dom-module>

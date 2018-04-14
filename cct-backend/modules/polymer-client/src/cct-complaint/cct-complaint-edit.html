@@ -1,0 +1,169 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/cuba-app/cuba-localize-behavior.html">
+<link rel="import" href="../../bower_components/cuba-ui/cuba-entity-edit-view-behavior.html">
+<link rel="import" href="../../bower_components/cuba-ui/cuba-lookup.html">
+<link rel="import" href="../../bower_components/cuba-data/cuba-entity.html">
+<link rel="import" href="../../bower_components/cuba-form/cuba-entity-form.html">
+<link rel="import" href="../../bower_components/cuba-file-field/cuba-file-field.html">
+<link rel="import" href="../../bower_components/cuba-styles/cuba-styles.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="cct-complaint-edit">
+  <template>
+    <style include="cuba-styles"></style>
+    <style include="shared-styles"></style>
+    <style>
+      paper-card {
+        display: block;
+      }
+    </style>
+
+    <cuba-entity entity-name="cct$Complaint" entity-id="[[entityId]]" view="complaintWithAssignee" data="{{entity}}"></cuba-entity>
+    <cuba-entity-form id="form"
+                      entity-name="cct$Complaint"
+                      entity="{{entity}}"
+                      on-cuba-form-response="_onSuccess"
+                      on-cuba-form-error="_onError"
+                      server-errors="{{serverErrors}}">
+      <paper-card>
+        <div class="card-content">
+
+        <paper-input value="{{entity.subject}}"
+             label="[[msg('cct$Complaint.subject')]]"
+             required
+             maxlength="255"
+             error-message="[[serverErrors.subject]]"
+             invalid="[[_isInvalid(serverErrors.subject)]]">
+</paper-input>
+<paper-input value="{{entity.body}}"
+             label="[[msg('cct$Complaint.body')]]"
+             required
+             
+             error-message="[[serverErrors.body]]"
+             invalid="[[_isInvalid(serverErrors.body)]]">
+</paper-input>
+<vaadin-combo-box label="[[msg('cct$Complaint.state')]]"
+                  items="[[enumValues('cct.backend.entity.ComplaintState')]]"
+                  value="{{entity.state}}"
+                  error-message="[[serverErrors.state]]"
+                  invalid="[[_isInvalid(serverErrors.state)]]"
+                  >
+</vaadin-combo-box>
+<cuba-lookup picked-entity="{{entity.assignee}}">
+  <div class="dropdown">
+    <cuba-entities entity-name="cct$UserExt" view="_minimal" data="{{entity_assigneeOptions}}"></cuba-entities>
+    <vaadin-combo-box label="[[msg('cct$Complaint.assignee')]]"
+                      items="[[entity_assigneeOptions]]"
+                      selected-item="{{entity.assignee}}"
+                      item-label-path="_instanceName"
+                      item-value-path="id"
+                      value="[[entity.assignee.id]]"
+                      
+                      error-message="[[serverErrors.assignee]]"
+                      invalid="[[_isInvalid(serverErrors.assignee)]]">
+    </vaadin-combo-box>
+  </div>
+</cuba-lookup>
+<vaadin-date-picker value="{{entity.plannedDate}}"
+                    label="[[msg('cct$Complaint.plannedDate')]]"
+                    
+                    error-message="[[serverErrors.plannedDate]]"
+                    invalid="[[_isInvalid(serverErrors.plannedDate)]]">
+</vaadin-date-picker>
+<vaadin-date-picker value="{{entity.closedDate}}"
+                    label="[[msg('cct$Complaint.closedDate')]]"
+                    
+                    error-message="[[serverErrors.closedDate]]"
+                    invalid="[[_isInvalid(serverErrors.closedDate)]]">
+</vaadin-date-picker>
+<paper-input value="{{entity.address}}"
+             label="[[msg('cct$Complaint.address')]]"
+             
+             maxlength="512"
+             error-message="[[serverErrors.address]]"
+             invalid="[[_isInvalid(serverErrors.address)]]">
+</paper-input>
+<cuba-lookup picked-entity="{{entity.category}}">
+  <div class="dropdown">
+    <cuba-entities entity-name="cct$ComplaintCategory" view="_minimal" data="{{entity_categoryOptions}}"></cuba-entities>
+    <vaadin-combo-box label="[[msg('cct$Complaint.category')]]"
+                      items="[[entity_categoryOptions]]"
+                      selected-item="{{entity.category}}"
+                      item-label-path="_instanceName"
+                      item-value-path="id"
+                      value="[[entity.category.id]]"
+                      required
+                      error-message="[[serverErrors.category]]"
+                      invalid="[[_isInvalid(serverErrors.category)]]">
+    </vaadin-combo-box>
+  </div>
+</cuba-lookup>
+<paper-input type="number"
+             value="{{entity.latitude}}"
+             label="[[msg('cct$Complaint.latitude')]]"
+             step="any"
+             
+             error-message="[[serverErrors.latitude]]"
+             invalid="[[_isInvalid(serverErrors.latitude)]]">
+</paper-input>
+<paper-input type="number"
+             value="{{entity.longitude}}"
+             label="[[msg('cct$Complaint.longitude')]]"
+             step="any"
+             
+             error-message="[[serverErrors.longitude]]"
+             invalid="[[_isInvalid(serverErrors.longitude)]]">
+</paper-input>
+<paper-input value="{{entity.declineReason}}"
+             label="[[msg('cct$Complaint.declineReason')]]"
+             
+             maxlength="255"
+             error-message="[[serverErrors.declineReason]]"
+             invalid="[[_isInvalid(serverErrors.declineReason)]]">
+</paper-input>
+<cuba-file-field label="[[msg('Upload')]] [[msg('cct$Complaint.imageFile')]]"
+                 file-descriptor="{{entity.imageFile}}"></cuba-file-field>
+<paper-checkbox checked="{{entity.emergency}}">[[msg('cct$Complaint.emergency')]]</paper-checkbox>
+<paper-checkbox checked="{{entity.prioritised}}">[[msg('cct$Complaint.prioritised')]]</paper-checkbox>
+<paper-input value="{{entity.moderatorRemark}}"
+             label="[[msg('cct$Complaint.moderatorRemark')]]"
+             
+             
+             error-message="[[serverErrors.moderatorRemark]]"
+             invalid="[[_isInvalid(serverErrors.moderatorRemark)]]">
+</paper-input>
+<paper-input value="{{entity.executorRemark}}"
+             label="[[msg('cct$Complaint.executorRemark')]]"
+             
+             
+             error-message="[[serverErrors.executorRemark]]"
+             invalid="[[_isInvalid(serverErrors.executorRemark)]]">
+</paper-input>
+
+
+        </div>
+        <div class="card-actions">
+          <paper-button on-tap="_delete" hidden$="[[!entityId]]">
+            [[msg('Delete')]]
+          </paper-button>
+          <paper-button on-tap="_cancel">
+            [[msg('Cancel')]]
+          </paper-button>
+          <paper-button on-tap="_save">
+            [[msg('Save')]]
+          </paper-button>
+        </div>
+      </paper-card>
+    </cuba-entity-form>
+
+    <paper-toast id="errorMessage">[[msg('Failed to save')]]</paper-toast>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'cct-complaint-edit',
+      behaviors: [CubaLocalizeBehavior, CubaEntityEditViewBehavior]
+    });
+  </script>
+</dom-module>
